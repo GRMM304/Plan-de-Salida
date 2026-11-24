@@ -1,0 +1,1495 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vista previa - Landing Plan de Salida (WordPress)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Roboto:wght@400;500;700&display=swap">
+<style>
+/* ============================================================
+   PLAN DE SALIDA — Landing v3
+   Sin frameworks externos: CSS propio + iconos SVG inline.
+   Paleta y tipografía de marca conservadas.
+   ============================================================ */
+:root{
+  --green:#a1ce66;          /* Principal brand green from brandboard */
+  --green-mid:#8bc049;      /* Slightly darker for hover states/accents */
+  --green-ink:#618a30;      /* Accessible green for smaller text */
+  --ink:#243e52;            /* Dark slate blue from brandboard */
+  --ink-2:#1c3141;          /* Darker slate for deep backgrounds */
+  --gray:#616161;           /* Main gray from brandboard */
+  --gray-soft:#858585;      /* Softer gray for less important text */
+  --soft:#e2f2c9;           /* Light green/cream from brandboard */
+  --bg:#f7f3ea;             /* Warm off-white background from brandboard */
+  --line:#d9d9d9;           /* Neutral line color */
+  --white:#ffffff;          /* White from brandboard */
+  --wa:#25d366;
+  --radius:16px;
+  --radius-lg:22px;
+  --shadow-sm:0 2px 10px rgba(36,62,82,.05);
+  --shadow:0 14px 36px rgba(36,62,82,.08);
+  --shadow-lg:0 22px 50px rgba(36,62,82,.14);
+  --maxw:1180px;
+  --font:'Roboto','Google Sans Text',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+  --font-display:'Outfit','Google Sans','Product Sans','Roboto',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+}
+.pds-landing,.pds-landing *,.pds-landing *::before,.pds-landing *::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:92px;-webkit-text-size-adjust:100%}
+body.pds-landing{
+  margin:0;padding:0;font-family:var(--font);color:var(--gray);background:var(--bg);
+  font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:clip;
+}
+.pds-landing :where(img){max-width:100%;height:auto;display:block}
+a{color:inherit;text-decoration:none}
+/* Enlaces de texto anadidos despues en el editor de WordPress.
+   :where() mantiene la especificidad en 0 para no pisar botones ni nav. */
+.pds-landing main :where(a:not([class])){color:var(--green-ink);text-decoration:underline}
+.pds-landing main :where(a:not([class]):hover){color:var(--ink)}
+/* Reinicios de elemento con :where(): ganan al tema (0,0,1) pero nunca
+   pisan las reglas .pds-* de los componentes. */
+.pds-landing :where(h1,h2,h3,h4){font-family:var(--font-display);color:var(--ink);margin:0 0 .5em;line-height:1.22;letter-spacing:-.015em;font-weight:700;text-wrap:pretty}
+.pds-landing :where(h1,h2){font-weight:800}
+.pds-landing :where(h1){font-size:clamp(1.85rem,4.2vw,2.85rem)}
+.pds-landing :where(h2){font-size:clamp(1.45rem,2.9vw,2rem)}
+.pds-landing :where(h3){font-size:1.05rem}
+.pds-landing :where(p){margin:0 0 1rem}
+.pds-landing :where(ul,ol){margin:0;padding:0;list-style:none}
+.pds-landing ::selection{background:var(--green);color:var(--ink)}
+.pds-landing :focus-visible{outline:3px solid var(--green-mid);outline-offset:2px;border-radius:6px}
+
+.pds-wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+.pds-section{padding:clamp(44px,6vw,72px) 0}
+.pds-eyebrow{
+  font-family:var(--font-display);
+  font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--green-ink);margin:0 0 10px;display:flex;align-items:center;gap:8px;
+}
+.pds-eyebrow::before{content:"";width:18px;height:2px;background:var(--green-mid);border-radius:2px}
+.pds-eyebrow.pds-center{justify-content:center}
+.pds-lead{font-size:1.02rem;color:var(--gray);max-width:62ch}
+.pds-head-block{max-width:760px;margin-bottom:34px}
+.pds-head-block.pds-center{margin-left:auto;margin-right:auto;text-align:center}
+.pds-head-block.pds-center .pds-lead{margin-left:auto;margin-right:auto}
+.pds-icon{width:1em;height:1em;fill:currentColor;flex:none;vertical-align:-.125em}
+
+/* ---------- Botones ---------- */
+.pds-btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  font-family:var(--font-display);font-weight:700;font-size:.94rem;line-height:1;
+  padding:14px 24px;border-radius:999px;border:1px solid transparent;cursor:pointer;
+  transition:transform .18s ease,box-shadow .18s ease,background .18s ease,color .18s ease;
+  text-align:center;
+}
+.pds-btn:active{transform:scale(.975)}
+.pds-btn-primary{background:var(--green);color:var(--ink);box-shadow:0 8px 22px rgba(161,206,102,.38)}
+.pds-btn-primary:hover{background:var(--green-mid);box-shadow:0 12px 28px rgba(161,206,102,.5)}
+.pds-btn-dark{background:var(--ink);color:#fff}
+.pds-btn-dark:hover{background:var(--green);color:var(--ink)}
+.pds-btn-ghost{background:#fff;color:var(--ink);border-color:var(--line);box-shadow:var(--shadow-sm)}
+.pds-btn-ghost:hover{background:var(--soft)}
+.pds-btn-outline{background:transparent;color:#fff;border-color:rgba(255,255,255,.55)}
+.pds-btn-outline:hover{background:#fff;color:var(--ink);border-color:#fff}
+.pds-btn-wa{background:var(--wa);color:#fff}
+.pds-btn-wa:hover{background:#1fb856}
+.pds-btn-block{width:100%}
+.pds-btn .pds-icon{width:1.15em;height:1.15em}
+
+/* ---------- Barra superior ---------- */
+.pds-topbar{
+  background:var(--ink);color:rgba(255,255,255,.92);font-size:12.5px;font-weight:600;
+  text-align:center;padding:9px 16px;display:flex;align-items:center;justify-content:center;gap:9px;
+}
+.pds-dot{position:relative;width:8px;height:8px;flex:none}
+.pds-dot span{position:absolute;inset:0;border-radius:50%;background:var(--green)}
+.pds-dot span:first-child{animation:ping 1.8s cubic-bezier(0,0,.2,1) infinite;opacity:.75}
+@keyframes ping{75%,100%{transform:scale(2.2);opacity:0}}
+
+/* ---------- Header ---------- */
+.pds-site-header{
+  position:sticky;top:0;z-index:60;background:rgba(255,255,255,.94);
+  backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid var(--line);
+  transition:box-shadow .25s ease,padding .25s ease;
+}
+.pds-site-header.pds-is-stuck{box-shadow:0 6px 20px rgba(20,32,26,.08)}
+.pds-header-inner{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:12px 20px;max-width:var(--maxw);margin:0 auto;transition:padding .25s ease}
+.pds-site-header.pds-is-stuck .pds-header-inner{padding-top:8px;padding-bottom:8px}
+/* Arriba del todo solo se muestra el CTA, centrado.
+   La barra completa (logo, menú, teléfono) aparece al empezar a hacer scroll. */
+.pds-site-header:not(.pds-is-stuck) .pds-logo,
+.pds-site-header:not(.pds-is-stuck) .pds-nav-links,
+.pds-site-header:not(.pds-is-stuck) .pds-phone-link{display:none}
+.pds-site-header:not(.pds-is-stuck) .pds-header-inner{justify-content:center}
+.pds-site-header:not(.pds-is-stuck) .pds-header-cta .pds-btn{padding:15px 30px;font-size:.98rem}
+.pds-site-header.pds-is-stuck .pds-logo,
+.pds-site-header.pds-is-stuck .pds-nav-links,
+.pds-site-header.pds-is-stuck .pds-phone-link{animation:pds-fade-in .35s ease both}
+@keyframes pds-fade-in{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.pds-logo img{height:140px;width:auto;transition:height .25s ease}
+.pds-site-header.pds-is-stuck .pds-logo img{height:100px}
+.pds-nav-links{display:none;gap:24px;font-family:var(--font-display);font-size:.9rem;font-weight:500}
+.pds-nav-links a{color:var(--gray);padding:4px 0;border-bottom:2px solid transparent;transition:color .2s,border-color .2s}
+.pds-nav-links a:hover{color:var(--ink);border-color:var(--green)}
+.pds-header-cta{display:flex;align-items:center;gap:14px}
+.pds-phone-link{display:none;align-items:center;gap:8px;font-size:.88rem;font-weight:700;color:var(--gray)}
+.pds-phone-link:hover{color:var(--green-ink)}
+.pds-phone-ico{width:30px;height:30px;border-radius:50%;background:rgba(160,205,102,.2);color:var(--green-ink);display:grid;place-items:center;flex:none}
+.pds-header-cta .pds-btn{padding:11px 18px;font-size:.85rem}
+@media(min-width:900px){.pds-nav-links{display:flex}.pds-phone-link{display:flex}}
+@media(min-width:1024px){.pds-logo img{height:200px}}
+
+/* ---------- Hero ---------- */
+.pds-hero{position:relative;background:#fff;overflow:hidden;padding:clamp(30px,4vw,54px) 0 clamp(40px,5vw,64px)}
+.pds-hero::before{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(900px 420px at 78% 8%,rgba(160,205,102,.20),transparent 62%),
+    radial-gradient(700px 460px at 4% 92%,rgba(20,32,26,.055),transparent 60%);
+  pointer-events:none;
+}
+.pds-hero-grid{position:relative;display:grid;gap:34px;grid-template-columns:1fr;align-items:center}
+@media(min-width:980px){.pds-hero-grid{grid-template-columns:1.06fr .94fr;gap:52px}}
+.pds-hero-logo{margin-bottom:12px}
+.pds-hero-logo img{height:120px;width:auto}
+@media(min-width:768px){.pds-hero-logo img{height:170px}}
+.pds-hero h1{margin-bottom:16px}
+.pds-underline{position:relative;color:var(--green-mid);white-space:nowrap}
+.pds-underline svg{position:absolute;left:0;bottom:-6px;width:100%;height:9px;color:rgba(160,205,102,.55)}
+.pds-hero .pds-lead{font-size:1.05rem;margin-bottom:22px}
+/* Destacados del hero: etiquetas de texto, no botones */
+.pds-chips{display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px;margin:0 0 34px}
+.pds-chip{display:inline-flex;align-items:center;gap:8px;font-size:.92rem;font-weight:700;color:var(--ink)}
+.pds-chip .pds-icon{color:var(--green-mid);width:1.1em;height:1.1em}
+.pds-chip.pds-accent{color:var(--green-ink)}
+.pds-chip + .pds-chip{border-left:1px solid var(--line);padding-left:20px}
+.pds-trust{display:grid;gap:12px;border-top:1px solid var(--line);padding-top:26px;font-size:.9rem;font-weight:500;color:var(--gray)}
+.pds-trust li{display:flex;align-items:flex-start;gap:10px}
+.pds-trust .pds-icon{color:var(--green-mid);width:1.05em;height:1.05em;margin-top:.3em}
+
+/* ---------- Formulario ---------- */
+.pds-form-card{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);
+  box-shadow:var(--shadow);padding:26px 22px 22px;position:relative;overflow:hidden;
+}
+@media(min-width:520px){.pds-form-card{padding:30px 28px 24px}}
+.pds-form-card::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,var(--green),#32b46c)}
+.pds-form-badge{
+  display:inline-flex;align-items:center;gap:7px;background:var(--soft);color:var(--green-ink);
+  border-radius:999px;padding:6px 13px;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+}
+.pds-form-head{text-align:center;margin-bottom:18px}
+.pds-form-head h2{font-size:1.42rem;margin:12px 0 6px}
+.pds-form-head p{font-size:.87rem;color:var(--gray-soft);margin:0}
+.pds-field{margin-bottom:13px}
+.pds-field label{display:block;font-family:var(--font-display);font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px}
+.pds-field .pds-req{color:#c0392b}
+.pds-field input,.pds-field select,.pds-field textarea{
+  width:100%;font-family:inherit;font-size:.9rem;color:var(--ink);background:#f9faf8;
+  border:1px solid var(--line);border-radius:12px;padding:13px 14px;transition:border-color .2s,box-shadow .2s;
+}
+.pds-field select{appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%236b756f'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;background-size:14px;padding-right:38px}
+.pds-field input:focus,.pds-field select:focus{outline:none;border-color:var(--green-mid);box-shadow:0 0 0 3px rgba(160,205,102,.28);background:#fff}
+.pds-field input[aria-invalid="true"],.pds-field select[aria-invalid="true"]{border-color:#c0392b;box-shadow:0 0 0 3px rgba(192,57,43,.12)}
+.pds-err{display:none;font-size:12.5px;font-weight:700;color:#c0392b;margin-top:5px}
+.pds-err.pds-show{display:block}
+.pds-consent{display:flex;gap:9px;align-items:flex-start;margin:14px 0 4px;font-size:12.5px;line-height:1.5;color:var(--gray-soft);cursor:pointer}
+.pds-consent input{width:16px;height:16px;margin-top:2px;accent-color:var(--green-mid);flex:none}
+.pds-consent a{color:var(--green-ink);font-weight:700;text-decoration:underline}
+.pds-form-foot{font-size:12px;text-align:center;color:var(--gray-soft);margin:14px 0 0;display:flex;align-items:center;justify-content:center;gap:6px}
+.pds-form-foot .pds-icon{color:var(--green-mid)}
+.pds-form-alt{margin-top:12px;text-align:center;font-size:12px;font-weight:700;color:var(--gray-soft)}
+.pds-form-alt a{color:var(--green-ink);text-decoration:underline}
+.pds-form-success{display:none;text-align:center;padding:14px 4px 6px}
+.pds-form-success .pds-ok{width:56px;height:56px;border-radius:50%;background:rgba(160,205,102,.2);color:var(--green-ink);display:grid;place-items:center;margin:0 auto 14px}
+.pds-form-success .pds-ok .pds-icon{width:26px;height:26px}
+.pds-is-sent .pds-form-body,.pds-is-sent .pds-form-head{display:none}
+.pds-is-sent .pds-form-success{display:block}
+.pds-spinner{width:15px;height:15px;border:2px solid rgba(20,32,26,.25);border-top-color:var(--ink);border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ---------- Banda de cifras ---------- */
+.pds-stats{background:var(--ink);color:#fff;padding:30px 0 24px}
+.pds-stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;align-items:start}
+@media(min-width:860px){.pds-stats-grid{grid-template-columns:repeat(4,1fr)}}
+.pds-stat{text-align:center;padding:16px 10px;border-radius:16px;transition:transform .3s cubic-bezier(.16,1,.3,1),background .3s ease}
+.pds-stat:hover{transform:translateY(-6px);background:rgba(255,255,255,.05)}
+.pds-stat b{display:block;font-family:var(--font-display);font-size:clamp(1.85rem,4vw,2.5rem);font-weight:800;letter-spacing:-.03em;color:var(--green);line-height:1.08;margin-bottom:8px;text-wrap:balance;transition:transform .3s cubic-bezier(.16,1,.3,1)}
+.pds-stat:hover b{transform:scale(1.06)}
+.pds-stat span{display:block;font-size:.82rem;font-weight:600;color:rgba(255,255,255,.75);line-height:1.45}
+.pds-stats-note{margin:22px auto 0;max-width:820px;text-align:center;font-style:italic;font-size:12px;line-height:1.6;color:rgba(255,255,255,.68);text-wrap:pretty}
+
+/* ---------- Banda oscura de enfoque ---------- */
+.pds-band{position:relative;background-color:var(--ink);background-size:cover;background-position:center;color:#fff;padding:clamp(60px,8vw,100px) 0;border-bottom:3px solid var(--green)}
+.pds-band::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg, var(--ink) 0%, rgba(36,62,82,0.85) 45%, rgba(36,62,82,0.2) 100%)}
+@media(max-width:859px){.pds-band::before{background:linear-gradient(0deg, var(--ink) 0%, rgba(36,62,82,0.9) 60%, rgba(36,62,82,0.4) 100%)}}
+.pds-band .pds-wrap{position:relative;z-index:1}
+.pds-band-content{max-width:580px}
+.pds-band h2{color:#fff;font-size:clamp(1.5rem,3vw,2.2rem);margin:0 0 16px;line-height:1.2}
+.pds-band .pds-eyebrow{color:var(--green)}
+.pds-band .pds-eyebrow::before{background:var(--green)}
+.pds-band p{color:rgba(255,255,255,.9);font-size:1.05rem;margin:0}
+
+/* ---------- Cards genéricas ---------- */
+.pds-grid{display:grid;gap:18px}
+.pds-g2{grid-template-columns:1fr}
+.pds-g3{grid-template-columns:1fr}
+.pds-g4{grid-template-columns:1fr}
+@media(min-width:640px){.pds-g2,.pds-g3,.pds-g4{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:980px){.pds-g3{grid-template-columns:repeat(3,1fr)}.pds-g4{grid-template-columns:repeat(4,1fr)}}
+.pds-card{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px 22px;
+  box-shadow:var(--shadow-sm);transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;
+}
+.pds-card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:rgba(160,205,102,.5)}
+.pds-card h3{margin-bottom:8px}
+.pds-card p{font-size:.89rem;margin:0;color:var(--gray)}
+.pds-card-ico{
+  width:46px;height:46px;border-radius:13px;background:rgba(160,205,102,.18);color:var(--green-ink);
+  display:grid;place-items:center;margin-bottom:15px;transition:background .25s,color .25s;
+}
+.pds-card-ico .pds-icon{width:22px;height:22px}
+.pds-card:hover .pds-card-ico{background:var(--green);color:var(--ink)}
+.pds-card.pds-on-soft{background:var(--bg)}
+
+/* Tarjetas que giran para mostrar el detalle */
+.pds-flip{perspective:1200px;min-height:250px;cursor:pointer;border-radius:var(--radius)}
+.pds-flip-in{position:relative;width:100%;min-height:250px;height:100%;transform-style:preserve-3d;transition:transform .65s cubic-bezier(.4,.2,.2,1)}
+.pds-flip:hover .pds-flip-in,.pds-flip:focus-visible .pds-flip-in,.pds-flip.pds-flipped .pds-flip-in{transform:rotateY(180deg)}
+.pds-flip-face{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  border-radius:var(--radius);
+  padding:28px 24px;box-shadow:var(--shadow-sm);
+}
+.pds-flip:hover .pds-flip-face{box-shadow:var(--shadow)}
+.pds-flip-front{
+  background:linear-gradient(135deg,#fff 0%,var(--soft) 100%);
+  border:1px solid var(--line);
+  align-items:flex-start; /* Alineación a la izquierda */
+}
+.pds-flip-front .pds-card-ico{
+  width:52px;height:52px;border-radius:14px;
+  background:#fff;color:var(--green-ink);
+  box-shadow:0 4px 12px rgba(36,62,82,.08);
+  margin-bottom:20px;
+}
+.pds-flip-front h3{
+  margin-bottom:0;
+  font-size:1.15rem;
+  line-height:1.3;
+  color:var(--ink);
+}
+.pds-flip-hint{
+  margin-top:auto;display:flex;align-items:center;gap:7px;font-family:var(--font-display);
+  font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--green-ink);
+  background:rgba(255,255,255,.6); padding:8px 14px; border-radius:999px;
+  border:1px solid rgba(161,206,102,.3);
+  transition:background .2s, border-color .2s;
+}
+.pds-flip:hover .pds-flip-hint { background:#fff; border-color:var(--green); }
+.pds-flip-hint .pds-icon{width:12px;height:12px}
+.pds-flip-back{transform:rotateY(180deg);background:var(--ink);border-color:var(--ink);justify-content:center}
+.pds-flip-back p{margin:0;font-size:.95rem;line-height:1.6;color:rgba(255,255,255,.9); text-align:center;}
+
+/* ---------- Por qué Plan de Salida (Light Image Integrated) ---------- */
+.pds-why-sec-bg {
+  position:relative;
+  background-color:var(--bg);
+  background-size:cover;
+  background-position:center;
+  padding:clamp(60px,8vw,100px) 0;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+.pds-why-sec-bg::before {
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(135deg, rgba(255,255,255,0.90) 0%, rgba(247,243,234,0.82) 100%);
+}
+.pds-why-sec-bg .pds-wrap { position:relative; z-index:1; }
+.pds-why-sec-bg .pds-head-block { text-align:center; max-width:760px; margin:0 auto 46px auto; }
+.pds-why-sec-bg .pds-head-block h2 { color:var(--ink); }
+.pds-why-sec-bg .pds-eyebrow { color:var(--green-ink); }
+.pds-why-sec-bg .pds-eyebrow::before { background:var(--green-mid); }
+
+.pds-why { display:grid; gap:14px; max-width:980px; margin:0 auto; }
+@media(min-width:900px) { .pds-why { grid-template-columns:.85fr 1.15fr; gap:54px; align-items:center; } }
+
+.pds-why-list { display:grid; gap:8px; }
+.pds-why-tab {
+  display:flex;align-items:center;gap:16px;width:100%;text-align:left;cursor:pointer;
+  background:transparent;border:0;border-left:2px solid rgba(36,62,82,.12);
+  padding:16px 20px;font-family:var(--font-display);font-size:1.05rem;font-weight:600;
+  color:var(--gray-soft);transition:all .25s ease;
+}
+.pds-why-tab:hover { color:var(--ink); background:rgba(255,255,255,.6); border-left-color:rgba(36,62,82,.3); }
+.pds-why-tab[aria-selected="true"] {
+  color:var(--ink); border-left-color:var(--green-mid);
+  background:linear-gradient(90deg, rgba(161,206,102,0.15) 0%, transparent 100%);
+}
+.pds-why-tab b { font-size:.85rem; font-weight:800; letter-spacing:.08em; color:var(--green-mid); flex:none; }
+
+.pds-why-panel { display:none; padding:10px 0; }
+.pds-why-panel.pds-active { display:block; animation: pds-fade-in .4s ease both; }
+.pds-why-panel .pds-card-ico {
+  width:64px;height:64px;border-radius:16px;
+  background:#fff; border:1px solid rgba(161,206,102,0.4); box-shadow:0 6px 16px rgba(36,62,82,0.08); color:var(--green-ink);
+  display:grid; place-items:center; margin-bottom:26px;
+}
+.pds-why-panel .pds-card-ico .pds-icon { width:30px;height:30px; }
+.pds-why-panel h3 { font-size:1.55rem; color:var(--ink); margin-bottom:14px; }
+.pds-why-panel p { font-size:1.08rem; color:var(--gray); margin:0; max-width:48ch; line-height:1.6; }
+
+/* ---------- Servicios ---------- */
+.pds-svc{display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow-sm);transition:transform .22s,box-shadow .22s}
+.pds-svc:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.pds-svc-ico{width:40px;height:40px;border-radius:11px;background:var(--soft);color:var(--green-ink);display:grid;place-items:center;flex:none}
+.pds-svc-ico .pds-icon{width:19px;height:19px}
+.pds-svc h3{font-size:.97rem;margin-bottom:4px}
+.pds-svc p{font-size:.85rem;margin:0}
+
+/* ---------- Proceso ---------- */
+.pds-steps{position:relative}
+.pds-steps-line{display:none}
+.pds-steps-grid{display:grid;position:relative;z-index:1;list-style:none;margin:0;padding:0}
+
+/* Móvil: timeline vertical */
+.pds-step{position:relative;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start;padding:0 0 26px}
+.pds-step:last-child{padding-bottom:0}
+.pds-step::before{
+  content:"";position:absolute;left:33px;top:74px;bottom:2px;width:2px;
+  background:linear-gradient(180deg,rgba(160,205,102,.85),rgba(160,205,102,.18));
+}
+.pds-step:last-child::before{display:none}
+.pds-step-badge{position:relative;width:68px;height:68px;flex:none}
+.pds-step-ico{
+  width:68px;height:68px;border-radius:50%;display:grid;place-items:center;color:var(--green-ink);
+  background:radial-gradient(circle at 32% 28%,#fff,var(--soft));
+  border:1px solid rgba(160,205,102,.5);box-shadow:inset 0 0 0 6px rgba(160,205,102,.10),0 6px 16px rgba(20,32,26,.06);
+  transition:background .25s,color .25s,border-color .25s,transform .25s;
+}
+.pds-step-ico .pds-icon{width:27px;height:27px}
+.pds-step-n{
+  position:absolute;top:-8px;right:-10px;width:38px;height:38px;border-radius:50%;
+  background:var(--green);color:var(--ink);border:3px solid #fff;
+  font-family:var(--font-display);font-size:18px;font-weight:800;line-height:1;
+  display:grid;place-items:center;box-shadow:0 6px 14px rgba(20,32,26,.25);
+}
+.pds-step-txt{padding-top:8px}
+.pds-step h3{font-size:1rem;margin-bottom:3px}
+.pds-step p{font-size:.87rem;margin:0}
+
+/* Tablet y desktop: tarjetas */
+@media(min-width:600px){
+  .pds-steps-grid{grid-template-columns:repeat(2,1fr);gap:16px}
+  .pds-step{
+    display:block;text-align:center;background:#fff;border:1px solid var(--line);
+    border-radius:18px;padding:26px 18px 22px;box-shadow:var(--shadow-sm);
+    transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;
+  }
+  .pds-step::before{display:none}
+  .pds-step:hover{transform:translateY(-5px);box-shadow:var(--shadow);border-color:rgba(160,205,102,.55)}
+  .pds-step:hover .pds-step-ico{background:var(--green);color:var(--ink);border-color:var(--green);transform:scale(1.05)}
+  .pds-step-badge{margin:0 auto 15px}
+  .pds-step-txt{padding-top:0}
+  .pds-step h3{font-size:.96rem}
+  .pds-step p{font-size:.84rem}
+}
+@media(min-width:1024px){
+  .pds-steps-grid{grid-template-columns:repeat(5,1fr);gap:14px}
+  /* conector oculto: los cortes entre tarjetas ensuciaban la lectura */
+  .pds-steps-line{display:none}
+}
+.pds-pledge{
+  margin-top:26px;display:flex;align-items:center;justify-content:center;gap:14px;
+  background:var(--soft);border:1px solid rgba(160,205,102,.35);border-radius:var(--radius);
+  padding:16px 22px;max-width:840px;margin-inline:auto;
+}
+.pds-pledge .pds-icon{width:28px;height:28px;color:var(--green-ink);flex:none}
+.pds-pledge p{margin:0;font-size:.88rem;font-weight:700;color:var(--green-ink)}
+
+/* ---------- Video ---------- */
+.pds-split{display:grid;gap:28px;align-items:center}
+@media(min-width:980px){.pds-split{grid-template-columns:.86fr 1.14fr;gap:44px}}
+.pds-video-shell{background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);padding:12px;box-shadow:var(--shadow)}
+.pds-yt{position:relative;width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:var(--ink);cursor:pointer;border:0;padding:0;display:block}
+.pds-yt img{width:100%;height:100%;object-fit:cover;opacity:.82;transition:opacity .3s,transform .5s}
+.pds-yt:hover img{opacity:1;transform:scale(1.03)}
+.pds-yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.pds-yt-play{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:66px;height:66px;border-radius:50%;background:rgba(160,205,102,.95);color:var(--ink);
+  display:grid;place-items:center;box-shadow:0 10px 28px rgba(20,32,26,.35);transition:transform .25s;
+}
+.pds-yt:hover .pds-yt-play{transform:translate(-50%,-50%) scale(1.09)}
+.pds-yt-play .pds-icon{width:26px;height:26px;margin-left:3px}
+.pds-yt-label{position:absolute;left:12px;bottom:12px;background:rgba(20,32,26,.78);color:#fff;font-size:11px;font-weight:700;padding:5px 11px;border-radius:999px}
+
+/* ---------- Testimonios ---------- */
+.pds-dark-sec{background:var(--ink);color:#fff}
+.pds-dark-sec h2,.pds-dark-sec h3{color:#fff}
+.pds-dark-sec .pds-eyebrow{color:var(--green)}
+.pds-dark-sec .pds-eyebrow::before{background:var(--green)}
+.pds-dark-sec .pds-lead{color:rgba(255,255,255,.8)}
+.pds-quote{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:18px;margin-bottom:14px;transition:background .25s}
+.pds-quote:hover{background:rgba(255,255,255,.11)}
+.pds-quote p{font-size:.9rem;font-style:italic;color:rgba(255,255,255,.92);margin:0 0 12px}
+.pds-quote figcaption{display:flex;align-items:center;gap:10px}
+.pds-avatar{width:34px;height:34px;border-radius:50%;background:rgba(160,205,102,.22);color:var(--green);display:grid;place-items:center;flex:none}
+.pds-avatar .pds-icon{width:15px;height:15px}
+.pds-quote b{display:block;font-size:12px;color:var(--green);font-weight:800}
+.pds-quote small{display:block;font-size:12px;color:rgba(255,255,255,.68)}
+.pds-shorts{display:flex;flex-wrap:wrap;gap:18px;justify-content:center}
+.pds-short{flex:1 1 230px;max-width:270px}
+.pds-short .pds-yt{aspect-ratio:9/16;border-radius:20px;border:1px solid rgba(255,255,255,.14)}
+.pds-shorts-note{width:100%;text-align:center;font-size:12px;color:rgba(255,255,255,.68);margin:4px 0 0}
+
+/* ---------- FAQ ---------- */
+.pds-faq{max-width:800px;margin:0 auto}
+.pds-faq-item{background:#fff;border:1px solid var(--line);border-radius:14px;margin-bottom:10px;overflow:hidden;transition:border-color .25s,box-shadow .25s}
+.pds-faq-item:hover{border-color:rgba(160,205,102,.6)}
+.pds-faq-q{
+  width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;text-align:left;
+  background:var(--bg);border:0;font-family:var(--font-display);font-size:.94rem;font-weight:600;color:var(--ink);
+  padding:16px 18px;cursor:pointer;transition:background .2s;
+}
+.pds-faq-q:hover{background:var(--soft)}
+.pds-faq-chev{width:26px;height:26px;border-radius:50%;background:#fff;box-shadow:var(--shadow-sm);display:grid;place-items:center;flex:none;transition:transform .3s,color .3s;color:var(--gray-soft)}
+.pds-faq-chev .pds-icon{width:12px;height:12px}
+.pds-faq-q[aria-expanded="true"] .pds-faq-chev{transform:rotate(180deg);color:var(--green-ink)}
+.pds-faq-a{max-height:0;overflow:hidden;visibility:hidden;transition:max-height .35s ease,visibility 0s linear .35s}
+.pds-faq-a.pds-open{visibility:visible;transition:max-height .35s ease,visibility 0s}
+.pds-faq-a>div{padding:14px 18px 18px;font-size:.87rem;border-top:1px solid var(--line);background:#fff}
+.pds-faq-a p:last-child{margin:0}
+
+/* ---------- CTA final ---------- */
+.pds-cta{position:relative;background:var(--ink-2);color:#fff;overflow:hidden;padding:clamp(36px,4.5vw,52px) 0}
+.pds-cta::before,.pds-cta::after{content:"";position:absolute;width:280px;height:280px;border-radius:50%;background:var(--green);opacity:.12;filter:blur(60px)}
+.pds-cta::before{right:-70px;top:-90px}
+.pds-cta::after{left:-70px;bottom:-90px}
+.pds-cta-grid{position:relative;display:grid;gap:22px;align-items:center}
+@media(min-width:860px){.pds-cta-grid{grid-template-columns:1fr auto;gap:36px}}
+.pds-cta h2{color:#fff;font-size:clamp(1.28rem,2.4vw,1.62rem)}
+.pds-cta p{color:rgba(255,255,255,.82);margin:0;font-size:.95rem}
+.pds-cta .pds-eyebrow{color:var(--green)}
+.pds-cta .pds-eyebrow::before{background:var(--green)}
+.pds-cta-actions{display:flex;flex-direction:column;gap:10px}
+@media(min-width:520px) and (max-width:859px){.pds-cta-actions{flex-direction:row}}
+
+/* ---------- Footer ---------- */
+.pds-site-footer{background:var(--ink);color:#8e9c94;border-top:4px solid var(--green);padding:52px 0 26px;font-size:.83rem}
+.pds-footer-grid{display:grid;gap:32px;margin-bottom:34px}
+@media(min-width:820px){.pds-footer-grid{grid-template-columns:1.5fr 1fr 1fr}}
+.pds-site-footer h4{color:#fff;font-size:.94rem;margin-bottom:16px;position:relative;display:inline-block;padding-bottom:6px}
+.pds-site-footer h4::after{content:"";position:absolute;left:0;bottom:0;width:50%;height:2px;background:var(--green)}
+.pds-site-footer a:hover{color:var(--green)}
+.pds-footer-logo{height:auto;width:100%;max-width:270px;margin-top:-30px;margin-bottom:-28px;opacity:.92;display:block}
+.pds-social{display:flex;gap:10px;margin-top:16px}
+.pds-social a{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.07);color:#fff;display:grid;place-items:center;transition:background .2s,transform .2s,color .2s}
+.pds-social a:hover{background:var(--green);color:var(--ink);transform:translateY(-3px)}
+.pds-f-list li{margin-bottom:14px}
+.pds-f-list a,.pds-f-addr{display:flex;align-items:flex-start;gap:12px}
+.pds-f-ico{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.07);display:grid;place-items:center;flex:none;color:var(--green);transition:background .2s}
+.pds-f-list a:hover .pds-f-ico{background:rgba(160,205,102,.22)}
+.pds-f-ico .pds-icon{width:14px;height:14px}
+.pds-maps{display:inline-flex;align-items:center;gap:7px;color:var(--green);font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;border-bottom:1px solid rgba(160,205,102,.4);padding-bottom:2px;margin-top:6px}
+.pds-maps:hover{color:#fff;border-color:#fff}
+.pds-footer-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:20px;display:flex;flex-direction:column;gap:8px;justify-content:space-between;font-size:12px;color:#9aa8a1}
+@media(min-width:720px){.pds-footer-bottom{flex-direction:row;align-items:center}}
+.pds-footer-bottom a{text-decoration:underline}
+.pds-legal-note{max-width:80ch;margin:22px auto 0;padding:0;font-size:12px;line-height:1.6;color:#8b978f;text-align:center;font-style:italic;text-wrap:pretty}
+
+/* ---------- Flotantes ---------- */
+.pds-wa-float{
+  position:fixed;right:20px;bottom:20px;width:58px;height:58px;border-radius:50%;
+  background:var(--wa);color:#fff;display:none;align-items:center;justify-content:center;
+  box-shadow:0 10px 26px rgba(37,211,102,.45);z-index:80;transition:transform .25s,box-shadow .25s;
+}
+.pds-wa-float::before{content:"";position:absolute;inset:-4px;border-radius:50%;background:rgba(37,211,102,.4);z-index:-1;animation:ping 2.2s cubic-bezier(0,0,.2,1) infinite}
+.pds-wa-float:hover{transform:translateY(-3px) scale(1.06)}
+.pds-wa-float .pds-icon{width:30px;height:30px}
+@media(min-width:721px){.pds-wa-float{display:flex}}
+.pds-mobile-bar{
+  position:fixed;left:0;right:0;bottom:0;z-index:80;display:flex;gap:8px;padding:9px 10px;
+  background:rgba(255,255,255,.97);border-top:1px solid var(--line);
+  box-shadow:0 -8px 22px rgba(20,32,26,.13);backdrop-filter:blur(8px);
+}
+.pds-mobile-bar .pds-btn{flex:1;padding:12px 10px;font-size:.84rem}
+@media(min-width:721px){.pds-mobile-bar{display:none}}
+@media(max-width:720px){body{padding-bottom:70px}}
+
+/* ---------- Reveal ---------- */
+.pds-reveal{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+.pds-reveal.pds-in{opacity:1;transform:none}
+.pds-d1{transition-delay:.08s}.pds-d2{transition-delay:.16s}.pds-d3{transition-delay:.24s}.pds-d4{transition-delay:.32s}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+  .pds-reveal{opacity:1;transform:none}
+}
+.pds-sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.pds-skip{position:absolute;left:-9999px;top:0;background:var(--ink);color:#fff;padding:12px 18px;z-index:200;border-radius:0 0 10px 0;font-weight:700}
+.pds-skip:focus{left:0}
+
+
+/* ============================================================
+   COMPATIBILIDAD WORDPRESS
+   ============================================================ */
+body.admin-bar .pds-site-header{top:32px}
+@media screen and (max-width:782px){body.admin-bar .pds-site-header{top:46px}}
+.pds-landing button,.pds-landing input,.pds-landing select,.pds-landing textarea{font-family:inherit;letter-spacing:normal;text-transform:none}
+.pds-landing .pds-btn,.pds-landing .pds-btn:hover,.pds-landing .pds-btn:focus{text-decoration:none}
+.pds-landing figure{margin:0}
+.pds-landing address{font-style:normal}
+.pds-landing section{scroll-margin-top:96px}
+.pds-hp{position:absolute!important;left:-9999px!important;width:1px;height:1px;overflow:hidden}
+.pds-btn[disabled]{opacity:.72;cursor:progress}
+/* ============================================================
+   BANDAS OSCURAS: mismo degradado verde y filo verde del CTA final
+   ============================================================ */
+.pds-site-header:not(.pds-is-stuck),
+.pds-stats,
+.pds-dark-sec{
+  background-color:var(--ink);
+  background-image:
+    radial-gradient(560px 220px at 12% 118%,rgba(160,205,102,.22),transparent 62%),
+    radial-gradient(520px 200px at 88% -18%,rgba(160,205,102,.16),transparent 62%);
+}
+.pds-site-header:not(.pds-is-stuck){backdrop-filter:none;border-bottom:3px solid var(--green)}
+.pds-dark-sec{border-bottom:3px solid var(--green)}
+
+@media print{
+  .pds-topbar,.pds-site-header,.pds-mobile-bar,.pds-wa-float,.pds-skip{display:none!important}
+  body.pds-landing{background:#fff}
+}
+</style>
+</head>
+<body class="pds-landing">
+<a class="pds-skip" href="#pds-form-lead">Ir al formulario de evaluación</a>
+
+<!-- ============ SPRITE DE ICONOS (SVG inline, sin CDN) ============ -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <symbol id="pds-i-wa" viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 110.9L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></symbol>
+  <symbol id="pds-i-phone" viewBox="0 0 512 512"><path d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64c0 247.4 200.6 448 448 448 18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3l49.3-40.3c13.7-11.2 18.4-30 11.6-46.3l-40-96z"/></symbol>
+  <symbol id="pds-i-mail" viewBox="0 0 512 512"><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4 0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></symbol>
+  <symbol id="pds-i-pin" viewBox="0 0 384 512"><path d="M215.7 499.2C267 435 384 279.4 384 192 384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2 12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 110 128 64 64 0 010-128z"/></symbol>
+  <symbol id="pds-i-shield" viewBox="0 0 512 512"><path d="M269.4 2.9C265.2 1 260.7 0 256 0s-9.2 1-13.4 2.9L54.3 82.8c-22 9.3-38.4 31-38.3 57.2.5 99.2 41.3 280.7 213.6 363.2 16.7 8 36.1 8 52.8 0C454.7 420.7 495.5 239.2 496 140c.1-26.2-16.3-47.9-38.3-57.2L269.4 2.9zM256 66.8V444.8C121 379 82.6 229.5 80 141.4L256 66.8z"/></symbol>
+  <symbol id="pds-i-shield-heart" viewBox="0 0 512 512"><path d="M269.4 2.9C265.2 1 260.7 0 256 0s-9.2 1-13.4 2.9L54.3 82.8c-22 9.3-38.4 31-38.3 57.2.5 99.2 41.3 280.7 213.6 363.2 16.7 8 36.1 8 52.8 0C454.7 420.7 495.5 239.2 496 140c.1-26.2-16.3-47.9-38.3-57.2L269.4 2.9zM144 221.5c0-25.1 20.4-45.5 45.5-45.5 12.1 0 23.7 4.8 32.2 13.3l14.3 14.3 14.3-14.3c8.5-8.5 20.1-13.3 32.2-13.3 25.1 0 45.5 20.4 45.5 45.5 0 12.1-4.8 23.7-13.3 32.2l-67.5 67.4c-6.2 6.2-16.4 6.2-22.6 0l-67.3-67.4c-8.5-8.5-13.3-20.1-13.3-32.2z"/></symbol>
+  <symbol id="pds-i-bolt" viewBox="0 0 448 512"><path d="M349.4 44.6c5.9-13.7 1.5-29.7-10.6-38.5s-28.6-8-39.9 1.8l-256 224c-10 8.8-13.6 22.9-8.9 35.3S50.7 288 64 288H175.5L98.6 467.4c-5.9 13.7-1.5 29.7 10.6 38.5s28.6 8 39.9-1.8l256-224c10-8.8 13.6-22.9 8.9-35.3S397.3 224 384 224H272.5L349.4 44.6z"/></symbol>
+  <symbol id="pds-i-gavel" viewBox="0 0 512 512"><path d="M318.6 9.4c-12.5-12.5-32.8-12.5-45.3 0l-120 120c-12.5 12.5-12.5 32.8 0 45.3l16 16c12.5 12.5 32.8 12.5 45.3 0l4-4L325.4 293.4l-4 4c-12.5 12.5-12.5 32.8 0 45.3l16 16c12.5 12.5 32.8 12.5 45.3 0l120-120c12.5-12.5 12.5-32.8 0-45.3l-16-16c-12.5-12.5-32.8-12.5-45.3 0l-4 4L330.6 74.6l4-4c12.5-12.5 12.5-32.8 0-45.3l-16-16zM178.7 323.9L82.7 227.9 5.4 428.3C-2 447.6 2.6 469.5 17.2 484.1S54.4 502 73.7 494.6l200.4-77.3-95.4-93.4z"/></symbol>
+  <symbol id="pds-i-house-alert" viewBox="0 0 576 512"><path d="M303.5 5.7c-9-7.6-22.1-7.6-31.1 0l-264 224c-10.1 8.6-11.3 23.7-2.8 33.8s23.7 11.3 33.8 2.8L64 245.5V432c0 44.2 35.8 80 80 80H432c44.2 0 80-35.8 80-80V245.5l24.5 20.8c10.1 8.6 25.3 7.3 33.8-2.8s7.3-25.3-2.8-33.8l-264-224zM288 144c13.3 0 24 10.7 24 24v96c0 13.3-10.7 24-24 24s-24-10.7-24-24V168c0-13.3 10.7-24 24-24zm0 224a28 28 0 110-56 28 28 0 010 56z"/></symbol>
+  <symbol id="pds-i-invoice" viewBox="0 0 384 512"><path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zM256 0V128H384L256 0zM208 176v17.3c9 1.4 17.9 3.6 26.4 5.8 12.8 3.4 20.5 16.6 17.1 29.4s-16.6 20.5-29.4 17.1c-14-3.7-27.6-6.6-39.7-6.8-9.8-.2-19.6 2.1-26.2 6.3-5.9 3.7-9.1 8.5-9.1 15.6 0 2.7.4 4.5 8 9 8.6 5.1 21.1 9 37.8 14.1l1 .3c14.6 4.4 33.6 10.2 47.9 19.6 15.8 10.4 29.7 27 30.1 52.3.4 25.9-12.6 45-30.6 56.2-8.8 5.5-18.6 9-28.6 11.1V440c0 13.3-10.7 24-24 24s-24-10.7-24-24V422.2c-12.7-2.9-24.7-6.9-35.2-10.4l-6.9-2.3c-12.6-4.2-19.4-17.7-15.2-30.3s17.7-19.4 30.3-15.2l7.4 2.5c14.6 4.9 26.8 9 39.2 9.4 10.2.3 19.7-1.9 25.9-5.8 5.4-3.4 8.7-8 8.6-16.2-.1-4-1.4-6.7-9.2-11.8-8.6-5.7-21.2-9.7-37.8-14.7l-2.6-.8c-14.2-4.2-32.1-9.6-45.7-18.4-15.6-10.1-29.7-26.4-29.9-51.4-.2-26.5 14.2-44.7 32-55.1 8.6-5 18.1-8.4 27.9-10.5V176c0-13.3 10.7-24 24-24s24 10.7 24 24z"/></symbol>
+  <symbol id="pds-i-handshake" viewBox="0 0 640 512"><path d="M323.4 85.2l-96.8 78.4c-16.1 13-19.2 36.4-7 53.1 12.9 17.8 38 21.3 55.3 7.8l99.3-77.2c7-5.4 17-4.2 22.5 2.8s4.2 17-2.8 22.5l-20.9 16.2L550.2 352H592c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H516.2l-4.7-4.1c-30.6-26.5-69.7-41.1-110.2-41.1-31.3 0-61.9 8.7-88.4 25.1l-8.7 5.4c.7.5 1.4 1 2.1 1.5l17.1 13.9zM48 64C21.5 64 0 85.5 0 112V304c0 26.5 21.5 48 48 48H108.4l55.3 55.3c15.6 15.6 40.9 15.6 56.6 0l11.3-11.3 51 51c15.6 15.6 40.9 15.6 56.6 0l11.3-11.3 22.6 22.6c15.6 15.6 40.9 15.6 56.6 0s15.6-40.9 0-56.6L275.7 245.2l-16.5 12.8c-35.5 27.6-86.4 20.5-113.2-15.5-26.4-35.4-19.7-85.5 15.1-113.7L216.6 64H48z"/></symbol>
+  <symbol id="pds-i-coins" viewBox="0 0 512 512"><path d="M512 80c0 18-14.3 34.6-38.4 48-29.1 16.1-72.5 27.5-122.3 30.9-3.7-1.8-7.4-3.5-11.3-5.1-32.9-13.8-77.2-21.8-125-21.8-19.9 0-39.1 1.4-57.4 4-.2-2-.4-4-.4-6 0-18 14.3-34.6 38.4-48C224.6 62.6 279.2 48 344 48s119.4 14.6 149.6 32C517.7 93.4 512 62 512 80zM160 192c48.6 0 93-8.4 125.6-22.2 26.2-11 46-24.4 55.6-39.4 9.7 15 29.5 28.4 55.6 39.4C429.5 183.6 473.9 192 512 192v32c0 18-14.3 34.6-38.4 48-30.2 17.4-84.8 32-149.6 32s-119.4-14.6-149.6-32C150.3 258.6 136 242 136 224v-32h24zM0 288c0-18 14.3-34.6 38.4-48C68.6 222.6 123.2 208 188 208s119.4 14.6 149.6 32c24.1 13.4 38.4 30 38.4 48s-14.3 34.6-38.4 48C307.4 353.4 252.8 368 188 368S68.6 353.4 38.4 336C14.3 322.6 0 306 0 288zm0 92.7C38 401 96.5 416 168 416h40c71.5 0 130-15 168-35.3V400c0 18-14.3 34.6-38.4 48-30.2 17.4-84.8 32-149.6 32S68.6 465.4 38.4 448C14.3 434.6 0 418 0 400V380.7z"/></symbol>
+  <symbol id="pds-i-house-lock" viewBox="0 0 640 512"><path d="M303.5 5.7c-9-7.6-22.1-7.6-31.1 0l-264 224c-10.1 8.6-11.3 23.7-2.8 33.8s23.7 11.3 33.8 2.8L64 245.5V432c0 44.2 35.8 80 80 80h180c-14.5-13-24-31.5-24-52.3V376c0-14.6 5.5-27.9 14.5-38v-26c0-48.6 39.4-88 88-88s88 39.4 88 88v18h9.5V245.5l24.5 20.8c10.1 8.6 25.3 7.3 33.8-2.8s7.3-25.3-2.8-33.8l-264-224zM402.5 264c-26.5 0-48 21.5-48 48v26h96v-26c0-26.5-21.5-48-48-48zM344 378h117c17.1 0 31 13.9 31 31v72c0 17.1-13.9 31-31 31H344c-17.1 0-31-13.9-31-31v-72c0-17.1 13.9-31 31-31z"/></symbol>
+  <symbol id="pds-i-users" viewBox="0 0 640 512"><path d="M144 160A80 80 0 100 160a80 80 0 10160 0zM512 160A80 80 0 10352 160a80 80 0 10160 0zM0 298.7C0 310.4 9.6 320 21.3 320H234.7c1.5 0 3-.2 4.4-.5-.9-4.3-1.4-8.8-1.4-13.5 0-33.5 24.4-61.3 56.4-66.6-8.5-1.9-17.3-2.9-26.4-2.9H176c-97.2 0-176 78.8-176 176v-13.8zM474.7 320H618.7c11.8 0 21.3-9.6 21.3-21.3 0-97.2-78.8-176-176-176H373.3c-9.1 0-17.9 1-26.4 2.9 32 5.3 56.4 33.1 56.4 66.6 0 4.7-.5 9.2-1.4 13.5 1.4.3 2.9.5 4.4.5h68.4zM320 320a80 80 0 100-160 80 80 0 100 160z"/></symbol>
+  <symbol id="pds-i-user" viewBox="0 0 448 512"><path d="M224 256A128 128 0 100 128a128 128 0 100 256zm-45.7 48C79.8 304 0 383.8 0 482.3 0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7 0-98.5-79.8-178.3-178.3-178.3H178.3z"/></symbol>
+  <symbol id="pds-i-stopwatch" viewBox="0 0 448 512"><path d="M176 0c-13.3 0-24 10.7-24 24s10.7 24 24 24h16v33.6C87 93.3 8 182.4 8 290c0 114.9 93.1 208 208 208s208-93.1 208-208c0-52.4-19.4-100.3-51.4-136.9l19.3-19.3c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-19.3 19.3C300.2 100 268 87 233.6 81.6V48h16c13.3 0 24-10.7 24-24s-10.7-24-24-24H176zm64 154v146c0 13.3-10.7 24-24 24s-24-10.7-24-24V154c0-13.3 10.7-24 24-24s24 10.7 24 24z"/></symbol>
+  <symbol id="pds-i-file" viewBox="0 0 384 512"><path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zm192 0V128H384L256 0zM96 224H288c8.8 0 16 7.2 16 16s-7.2 16-16 16H96c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 80H288c8.8 0 16 7.2 16 16s-7.2 16-16 16H96c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 80H224c8.8 0 16 7.2 16 16s-7.2 16-16 16H96c-8.8 0-16-7.2-16-16s7.2-16 16-16z"/></symbol>
+  <symbol id="pds-i-search" viewBox="0 0 512 512"><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 100-288 144 144 0 100 288z"/></symbol>
+  <symbol id="pds-i-chart" viewBox="0 0 512 512"><path d="M64 64c0-17.7-14.3-32-32-32S0 46.3 0 64V400c0 44.2 35.8 80 80 80H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H80c-8.8 0-16-7.2-16-16V64zm406.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L320 210.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L240 221.3l57.4 57.4c12.5 12.5 32.8 12.5 45.3 0l128-128z"/></symbol>
+  <symbol id="pds-i-check" viewBox="0 0 448 512"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></symbol>
+  <symbol id="pds-i-chevron" viewBox="0 0 512 512"><path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></symbol>
+  <symbol id="pds-i-arrow" viewBox="0 0 448 512"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.7 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></symbol>
+  <symbol id="pds-i-play" viewBox="0 0 384 512"><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></symbol>
+  <symbol id="pds-i-ig" viewBox="0 0 448 512"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></symbol>
+  <symbol id="pds-i-fb" viewBox="0 0 320 512"><path d="M80 299.3V512H196V299.3h86.5l18-97.8H196v-33.7c0-51.5 20.6-71.2 72.7-71.2 16.2 0 29.2 .4 36.8 1.2V9.1C291.1 5.2 256.2 1 236.2 1 129.3 1 80 51.5 80 160.9v40.6H0v97.8H80z"/></symbol>
+  <symbol id="pds-i-external" viewBox="0 0 512 512"><path d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32h82.7L201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3V192c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32H320zM80 32C35.8 32 0 67.8 0 112V432c0 44.2 35.8 80 80 80H400c44.2 0 80-35.8 80-80V320c0-17.7-14.3-32-32-32s-32 14.3-32 32V432c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V112c0-8.8 7.2-16 16-16H192c17.7 0 32-14.3 32-32s-14.3-32-32-32H80z"/></symbol>
+</svg>
+
+<!-- ============ BARRA SUPERIOR ============ -->
+<div class="pds-topbar">
+  <span class="pds-dot"><span></span><span></span></span>
+  <span>Equipo disponible hoy para revisar casos de remate, embargo y financiamiento</span>
+</div>
+
+<!-- ============ HEADER ============ -->
+<header class="pds-site-header" id="pds-site-header">
+  <div class="pds-header-inner">
+    <a class="pds-logo" href="#pds-inicio" aria-label="Plan de Salida — inicio">
+      <img src="https://img.mailinblue.com/8928778/images/content_library/original/6a96ff7b628cf72a3c43ad71.png" alt="Plan de Salida" fetchpriority="high" decoding="async">
+    </a>
+    <nav class="pds-nav-links" aria-label="Secciones">
+      <a href="#pds-situaciones">Situaciones</a>
+      <a href="#pds-soluciones">Soluciones</a>
+      <a href="#pds-proceso">Cómo funciona</a>
+      <a href="#pds-preguntas">Preguntas</a>
+    </nav>
+    <div class="pds-header-cta">
+      <a class="pds-phone-link" href="tel:+56233571087" data-track="click_telefono" data-loc="header">
+        <span class="pds-phone-ico"><svg class="pds-icon" style="width:12px;height:12px"><use href="#pds-i-phone"></use></svg></span>
+        <span>+56 2 3357 1087</span>
+      </a>
+      <a class="pds-btn pds-btn-primary pds-js-wa" href="#" data-track="click_whatsapp" data-loc="header">
+        <svg class="pds-icon"><use href="#pds-i-wa"></use></svg> Evalúa tu caso
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<main id="pds-inicio">
+<section class="pds-hero">
+  <div class="pds-wrap pds-hero-grid">
+    <div>
+      <div class="pds-hero-logo pds-reveal">
+        <img src="https://img.mailinblue.com/8928778/images/content_library/original/6a96ff7b750d5f9277e3f7f7.png" alt="Plan de Salida" fetchpriority="high" decoding="async">
+      </div>
+      <p class="pds-eyebrow pds-reveal">Defensa patrimonial y financiamiento</p>
+      <h1 class="pds-reveal">Cuando tu casa está en riesgo, necesitas una <span class="pds-underline">salida real<svg viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true"><path d="M0 5 Q 50 11 100 5" stroke="currentColor" stroke-width="4" fill="none"/></svg></span></h1>
+      <p class="pds-lead pds-reveal pds-d1">Primero escuchamos lo que estás viviendo. Después ordenamos la urgencia y evaluamos qué alternativas jurídicas y financieras siguen disponibles: defensa ante remates y embargos, liquidez y leaseback con opción de recompra.</p>
+
+      <ul class="pds-chips pds-reveal pds-d2">
+        <li class="pds-chip"><svg class="pds-icon"><use href="#pds-i-gavel"></use></svg> Remates</li>
+        <li class="pds-chip"><svg class="pds-icon"><use href="#pds-i-file"></use></svg> Embargos</li>
+        <li class="pds-chip pds-accent"><svg class="pds-icon"><use href="#pds-i-coins"></use></svg> Financiamiento y leaseback</li>
+      </ul>
+
+      <ul class="pds-trust pds-reveal pds-d3">
+        <li><svg class="pds-icon"><use href="#pds-i-bolt"></use></svg> Respuesta en menos de 24 h</li>
+        <li><svg class="pds-icon"><use href="#pds-i-file"></use></svg> Contratos y condiciones por escrito</li>
+        <li><svg class="pds-icon"><use href="#pds-i-handshake"></use></svg> Acompañamiento de principio a fin</li>
+      </ul>
+    </div>
+
+    <!-- Formulario -->
+    <div class="pds-reveal pds-d2">
+      <div class="pds-form-card" id="pds-form-lead">
+        <div class="pds-form-head">
+          <span class="pds-form-badge">Sin costo · Sin compromiso</span>
+          <h2>Cuéntanos qué está pasando</h2>
+          <p>Un especialista revisa tu caso. No necesitas tener todos los documentos ahora.</p>
+        </div>
+
+        <div class="pds-form-body">
+          <form id="pds-lead-form" novalidate>
+            <div class="pds-field">
+              <label for="pds-f-nombre">Nombre y apellido <span class="pds-req">*</span></label>
+              <input id="pds-f-nombre" name="nombre" type="text" autocomplete="name" placeholder="Tu nombre" aria-describedby="pds-e-nombre" required>
+              <p class="pds-err" role="alert" id="pds-e-nombre">Escribe tu nombre para que sepamos cómo dirigirnos a ti.</p>
+            </div>
+
+            <div class="pds-field">
+              <label for="pds-f-telefono">Teléfono / WhatsApp <span class="pds-req">*</span></label>
+              <input id="pds-f-telefono" name="telefono" type="tel" inputmode="tel" autocomplete="tel" placeholder="+56 9 1234 5678" aria-describedby="pds-e-telefono" required>
+              <p class="pds-err" role="alert" id="pds-e-telefono">Revisa el número: debe tener 9 dígitos (ej. 9 1234 5678).</p>
+            </div>
+
+            <div class="pds-field">
+              <label for="pds-f-email">Correo electrónico</label>
+              <input id="pds-f-email" name="email" type="email" autocomplete="email" placeholder="tucorreo@ejemplo.cl" aria-describedby="pds-e-email">
+              <p class="pds-err" role="alert" id="pds-e-email">Revisa el formato del correo.</p>
+            </div>
+
+            <div class="pds-field">
+              <label for="pds-f-situacion">¿En qué necesitas ayuda? <span class="pds-req">*</span></label>
+              <select id="pds-f-situacion" name="situacion" aria-describedby="pds-e-situacion" required>
+                <option value="">Selecciona una opción</option>
+                <option>Riesgo de remate hipotecario</option>
+                <option>Embargo o demanda en curso</option>
+                <option>Necesito financiamiento o leaseback</option>
+                <option>Quiero evaluar una recompra</option>
+                <option>Otra urgencia patrimonial</option>
+              </select>
+              <p class="pds-err" role="alert" id="pds-e-situacion">Selecciona la opción que más se parezca a tu caso.</p>
+            </div>
+
+            <label class="pds-consent">
+              <input type="checkbox" id="pds-f-consent" aria-describedby="pds-e-consent" required>
+              <span>Autorizo que Plan de Salida me contacte por teléfono, WhatsApp o correo para evaluar mi caso. Trataremos tus datos de forma confidencial según nuestra <a href="https://plandesalida.cl/politica-privacidad/" target="_blank" rel="noopener">política de privacidad</a>.</span>
+            </label>
+            <p class="pds-err" role="alert" id="pds-e-consent">Necesitamos tu autorización para poder contactarte.</p>
+
+            <label class="pds-consent">
+              <input type="checkbox" id="pds-f-publicidad" name="acepta_publicidad">
+              <span>(Opcional) Quiero recibir información comercial y novedades de Plan de Salida. Puedes darte de baja, modificar o eliminar tus datos cuando quieras escribiendo a contacto@plandesalida.cl.</span>
+            </label>
+
+            <div class="pds-hp" aria-hidden="true">
+              <label for="pds-f-web">No completar este campo</label>
+              <input id="pds-f-web" name="website" type="text" tabindex="-1" autocomplete="off">
+            </div>
+            <input type="hidden" name="atribucion" id="pds-f-atribucion">
+            <input type="hidden" name="tiempo" id="pds-f-tiempo">
+
+            <button class="pds-btn pds-btn-primary pds-btn-block" type="submit" id="pds-lead-submit" style="margin-top:14px">
+              <span class="pds-lbl">Quiero que revisen mi caso</span>
+              <svg class="pds-icon"><use href="#pds-i-arrow"></use></svg>
+            </button>
+          </form>
+
+          <p class="pds-form-foot"><svg class="pds-icon"><use href="#pds-i-shield"></use></svg> Tus datos son confidenciales y no se comparten con terceros.</p>
+          <p class="pds-form-alt">¿Prefieres escribir directo? <a href="#" class="pds-js-wa" data-track="click_whatsapp" data-loc="form_alt">Háblanos por WhatsApp</a></p>
+        </div>
+
+        <div class="pds-form-success" role="status" aria-live="polite">
+          <div class="pds-ok"><svg class="pds-icon"><use href="#pds-i-check"></use></svg></div>
+          <h2 style="font-size:1.25rem">Recibimos tu solicitud</h2>
+          <p style="font-size:.9rem">Te contactaremos a la brevedad, normalmente dentro de las próximas 24 horas hábiles. Si tu caso es urgente, escríbenos ahora y avanzamos de inmediato.</p>
+          <a class="pds-btn pds-btn-wa pds-btn-block pds-js-wa" href="#" data-track="click_whatsapp" data-loc="post_form" style="margin-top:8px">
+            <svg class="pds-icon"><use href="#pds-i-wa"></use></svg> Escribir por WhatsApp ahora
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CIFRAS ============ -->
+<section class="pds-stats">
+  <div class="pds-wrap">
+    <div class="pds-stats-grid pds-reveal">
+      <div class="pds-stat"><b>&lt; 24 h</b><span>Respuesta tras el primer contacto</span></div>
+      <div class="pds-stat"><b>51 % – 60 %</b><span>Rango habitual de financiamiento sobre el valor comercial</span></div>
+      <div class="pds-stat"><b>12 – 18 meses</b><span>Plazo típico de la opción de recompra en leaseback</span></div>
+      <div class="pds-stat"><b>7 – 15 días</b><span>Plazo referencial desde la solicitud al desembolso</span></div>
+    </div>
+    <p class="pds-stats-note">Cifras referenciales basadas en operaciones habituales. Cada caso se evalúa individualmente y las condiciones finales dependen del valor comercial de la propiedad, sus gravámenes, el estado del proceso judicial y la evaluación de riesgo. No constituyen una oferta ni garantizan un resultado.</p>
+  </div>
+</section>
+
+<!-- ============ ENFOQUE ============ -->
+<section class="pds-band" style="background-image: url('https://img.mailinblue.com/8928778/images/content_library/original/6a96f83991d6b30ecf1edb3c.png');">
+  <div class="pds-wrap pds-reveal">
+    <div class="pds-band-content">
+      <p class="pds-eyebrow">El cambio de enfoque</p>
+      <h2><span style="font-weight:500">No llegaste buscando un contrato</span><br>Llegaste buscando una salida</h2>
+      <p>La conversación parte por lo que estás viviendo: no perder tu casa, proteger a tu familia, ganar tiempo y recuperar estabilidad. Los servicios jurídicos y financieros son la forma de llegar ahí, no el punto de partida.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SITUACIONES ============ -->
+<section class="pds-section" id="pds-situaciones" style="background:#fff">
+  <div class="pds-wrap">
+    <div class="pds-head-block pds-reveal">
+      <p class="pds-eyebrow">Situaciones que abordamos</p>
+      <h2><span style="font-weight:500">Primero entendemos el problema</span><br>Luego definimos la estrategia</h2>
+    </div>
+    <div class="pds-grid pds-g3">
+      <article class="pds-flip pds-reveal pds-d1" tabindex="0" role="button" aria-expanded="false" aria-label="Tu propiedad está en riesgo de remate: ver detalle">
+        <div class="pds-flip-in">
+          <div class="pds-flip-face pds-flip-front">
+            <div class="pds-card-ico"><svg class="pds-icon"><use href="#pds-i-house-alert"></use></svg></div>
+            <h3>Tu propiedad está en riesgo de remate</h3>
+            <p class="pds-flip-hint">Ver detalle <svg class="pds-icon"><use href="#pds-i-arrow"></use></svg></p>
+          </div>
+          <div class="pds-flip-face pds-flip-back">
+            <p>Revisamos el expediente, los plazos y el estado del proceso para saber qué acciones siguen disponibles para ganar tiempo y abrir una alternativa financiera.</p>
+          </div>
+        </div>
+      </article>
+      <article class="pds-flip pds-reveal pds-d2" tabindex="0" role="button" aria-expanded="false" aria-label="Las deudas están afectando a tu familia: ver detalle">
+        <div class="pds-flip-in">
+          <div class="pds-flip-face pds-flip-front">
+            <div class="pds-card-ico"><svg class="pds-icon"><use href="#pds-i-invoice"></use></svg></div>
+            <h3>Las deudas están afectando a tu familia</h3>
+            <p class="pds-flip-hint">Ver detalle <svg class="pds-icon"><use href="#pds-i-arrow"></use></svg></p>
+          </div>
+          <div class="pds-flip-face pds-flip-back">
+            <p>Ordenamos la situación financiera para definir si corresponde una defensa, una renegociación, un leaseback habitacional u otra estructura de rescate.</p>
+          </div>
+        </div>
+      </article>
+      <article class="pds-flip pds-reveal pds-d3" tabindex="0" role="button" aria-expanded="false" aria-label="Sientes que ya no te quedan opciones: ver detalle">
+        <div class="pds-flip-in">
+          <div class="pds-flip-face pds-flip-front">
+            <div class="pds-card-ico"><svg class="pds-icon"><use href="#pds-i-handshake"></use></svg></div>
+            <h3>Sientes que ya no te quedan opciones</h3>
+            <p class="pds-flip-hint">Ver detalle <svg class="pds-icon"><use href="#pds-i-arrow"></use></svg></p>
+          </div>
+          <div class="pds-flip-face pds-flip-back">
+            <p>Aunque el banco o el mercado tradicional hayan cerrado la puerta, evaluamos otras vías con condiciones escritas y acompañamiento durante todo el proceso.</p>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SOLUCIONES ============ -->
+<section class="pds-section" id="pds-soluciones" style="background:var(--bg);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="pds-wrap">
+    <div class="pds-head-block pds-reveal">
+      <p class="pds-eyebrow">Qué podemos evaluar en tu caso</p>
+      <h2>Seis vías concretas, según lo que permita tu situación</h2>
+      <p class="pds-lead">No todas aplican a todos los casos. En la primera conversación te decimos con honestidad cuáles son viables para ti y cuáles no.</p>
+    </div>
+    <div class="pds-grid pds-g3">
+      <article class="pds-svc pds-reveal pds-d1"><div class="pds-svc-ico"><svg class="pds-icon"><use href="#pds-i-gavel"></use></svg></div><div><h3>Detener o postergar un remate</h3><p>Análisis del expediente y acciones judiciales cuando existe fundamento y plazo para presentarlas.</p></div></article>
+      <article class="pds-svc pds-reveal pds-d1"><div class="pds-svc-ico"><svg class="pds-icon"><use href="#pds-i-shield"></use></svg></div><div><h3>Defensa ante embargos</h3><p>Revisión de la demanda, oposición y gestiones para proteger bienes y ordenar la situación.</p></div></article>
+      <article class="pds-svc pds-reveal pds-d2"><div class="pds-svc-ico"><svg class="pds-icon"><use href="#pds-i-coins"></use></svg></div><div><h3>Financiamiento con garantía</h3><p>Acceso a liquidez respaldada en la propiedad cuando la banca tradicional ya no es una opción.</p></div></article>
+      <article class="pds-svc pds-reveal pds-d2"><div class="pds-svc-ico"><svg class="pds-icon"><use href="#pds-i-house-lock"></use></svg></div><div><h3>Leaseback con opción de recompra</h3><p>Venta con arriendo y opción de recompra, con condiciones y plazos definidos por escrito antes de firmar.</p></div></article>
+      <article class="pds-svc pds-reveal pds-d3"><div class="pds-svc-ico"><svg class="pds-icon"><use href="#pds-i-file"></use></svg></div><div><h3>Ley de insolvencia y reemprendimiento</h3><p>Evaluación de renegociación o liquidación concursal cuando es el camino más conveniente.</p></div></article>
+      <article class="pds-svc pds-reveal pds-d3"><div class="pds-svc-ico"><svg class="pds-icon"><use href="#pds-i-users"></use></svg></div><div><h3>Asesoría legal inmobiliaria</h3><p>Revisión de títulos, gravámenes y contratos para tomar decisiones sobre la propiedad con respaldo.</p></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROCESO ============ -->
+<section class="pds-section" id="pds-proceso" style="background:#fff">
+  <div class="pds-wrap">
+    <div class="pds-head-block pds-center pds-reveal">
+      <p class="pds-eyebrow pds-center">Así trabajamos contigo</p>
+      <h2>Un proceso simple, humano y efectivo</h2>
+    </div>
+
+    <div class="pds-steps">
+      <div class="pds-steps-line" aria-hidden="true"></div>
+      <ol class="pds-steps-grid">
+        <li class="pds-step pds-reveal pds-d1">
+          <div class="pds-step-badge"><span class="pds-step-ico"><svg class="pds-icon"><use href="#pds-i-wa"></use></svg></span><b class="pds-step-n">1</b></div>
+          <div class="pds-step-txt"><h3>Nos contactas</h3><p>Por WhatsApp o formulario, con lo que tengas a mano.</p></div>
+        </li>
+        <li class="pds-step pds-reveal pds-d1">
+          <div class="pds-step-badge"><span class="pds-step-ico"><svg class="pds-icon"><use href="#pds-i-phone"></use></svg></span><b class="pds-step-n">2</b></div>
+          <div class="pds-step-txt"><h3>Te llamamos</h3><p>Escuchamos tu situación y detectamos los plazos críticos.</p></div>
+        </li>
+        <li class="pds-step pds-reveal pds-d2">
+          <div class="pds-step-badge"><span class="pds-step-ico"><svg class="pds-icon"><use href="#pds-i-search"></use></svg></span><b class="pds-step-n">3</b></div>
+          <div class="pds-step-txt"><h3>Analizamos tu caso</h3><p>Revisión jurídica y financiera de las alternativas posibles.</p></div>
+        </li>
+        <li class="pds-step pds-reveal pds-d3">
+          <div class="pds-step-badge"><span class="pds-step-ico"><svg class="pds-icon"><use href="#pds-i-chart"></use></svg></span><b class="pds-step-n">4</b></div>
+          <div class="pds-step-txt"><h3>Te presentamos un plan</h3><p>Claro, realista y por escrito. Sin compromiso.</p></div>
+        </li>
+        <li class="pds-step pds-reveal pds-d4">
+          <div class="pds-step-badge"><span class="pds-step-ico"><svg class="pds-icon"><use href="#pds-i-handshake"></use></svg></span><b class="pds-step-n">5</b></div>
+          <div class="pds-step-txt"><h3>Te acompañamos</h3><p>Hasta ejecutar la mejor solución posible para tu caso.</p></div>
+        </li>
+      </ol>
+    </div>
+
+    <div class="pds-pledge pds-reveal">
+      <svg class="pds-icon"><use href="#pds-i-shield-heart"></use></svg>
+      <p>Rápido, transparente y enfocado en proteger lo más importante: tu patrimonio y tu familia.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VIDEO ============ -->
+<section class="pds-section" style="background:linear-gradient(180deg,#fff,var(--bg));border-top:1px solid var(--line)">
+  <div class="pds-wrap pds-split">
+    <div class="pds-reveal">
+      <p class="pds-eyebrow">Primera conversación</p>
+      <h2>Te explicamos las alternativas que puedes evaluar para tu caso</h2>
+      <p class="pds-lead">En este breve video mostramos cómo analizamos cada situación: escuchamos, ordenamos la urgencia y revisamos qué herramientas legales y financieras aplican para proteger tu patrimonio.</p>
+      <a class="pds-btn pds-btn-primary pds-js-scroll-form" href="#pds-form-lead" data-track="click_cta" data-loc="video" style="margin-top:6px">
+        Quiero mi evaluación <svg class="pds-icon"><use href="#pds-i-arrow"></use></svg>
+      </a>
+    </div>
+    <div class="pds-video-shell pds-reveal pds-d2">
+      <button class="pds-yt" type="button" data-yt="A-H34L5pFKk" data-title="Alternativas Plan de Salida" aria-label="Reproducir video: alternativas de Plan de Salida">
+        <img src="https://i.ytimg.com/vi/A-H34L5pFKk/maxresdefault.jpg" alt="" loading="lazy" decoding="async" width="1280" height="720">
+        <span class="pds-yt-play"><svg class="pds-icon"><use href="#pds-i-play"></use></svg></span>
+        <span class="pds-yt-label">Ver video · 2 min</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ POR QUÉ ============ -->
+<section class="pds-why-sec-bg" style="background-image: url('https://img.mailinblue.com/8928778/images/content_library/original/6a97168d08c772bbe675efb2.png');">
+  <div class="pds-wrap">
+    <div class="pds-head-block pds-center pds-reveal">
+      <p class="pds-eyebrow pds-center">Por qué Plan de Salida</p>
+      <h2>Capacidad real de ejecución, con confianza y transparencia</h2>
+    </div>
+    <div class="pds-why pds-reveal pds-d1">
+      <div class="pds-why-list" role="tablist" aria-label="Razones para elegir Plan de Salida">
+        <button class="pds-why-tab" type="button" role="tab" id="pds-why-t1" aria-controls="pds-why-p1" aria-selected="true"><b>01</b><span>Actuamos cuando el tiempo importa</span></button>
+        <button class="pds-why-tab" type="button" role="tab" id="pds-why-t2" aria-controls="pds-why-p2" aria-selected="false"><b>02</b><span>Equipo altamente especializado</span></button>
+        <button class="pds-why-tab" type="button" role="tab" id="pds-why-t3" aria-controls="pds-why-p3" aria-selected="false"><b>03</b><span>La propiedad no es el objetivo</span></button>
+        <button class="pds-why-tab" type="button" role="tab" id="pds-why-t4" aria-controls="pds-why-p4" aria-selected="false"><b>04</b><span>Todo queda por escrito</span></button>
+      </div>
+      <div>
+        <div class="pds-why-panel pds-active" id="pds-why-p1" role="tabpanel" aria-labelledby="pds-why-t1">
+          <div class="pds-card-ico"><svg class="pds-icon"><use href="#pds-i-stopwatch"></use></svg></div>
+          <h3>Actuamos cuando el tiempo importa</h3>
+          <p>Identificamos los plazos críticos del proceso legal y priorizamos con sentido de urgencia lo que exige atención inmediata para ganar tiempo.</p>
+        </div>
+        <div class="pds-why-panel" id="pds-why-p2" role="tabpanel" aria-labelledby="pds-why-t2">
+          <div class="pds-card-ico"><svg class="pds-icon"><use href="#pds-i-users"></use></svg></div>
+          <h3>Tu caso lo revisa un equipo especializado</h3>
+          <p>Trabajamos exclusivamente en defensa patrimonial: remates, embargos, reestructuración y leaseback. Conocemos los caminos jurídicos y financieros.</p>
+        </div>
+        <div class="pds-why-panel" id="pds-why-p3" role="tabpanel" aria-labelledby="pds-why-t3">
+          <div class="pds-card-ico"><svg class="pds-icon"><use href="#pds-i-house-lock"></use></svg></div>
+          <h3>La propiedad no es el objetivo final</h3>
+          <p>Buscamos estructurar contratos que dejen abierta una posibilidad realista y alcanzable de que recuperes tu casa cuando las condiciones lo permitan.</p>
+        </div>
+        <div class="pds-why-panel" id="pds-why-p4" role="tabpanel" aria-labelledby="pds-why-t4">
+          <div class="pds-card-ico"><svg class="pds-icon"><use href="#pds-i-shield-heart"></use></svg></div>
+          <h3>Todo queda por escrito y claro</h3>
+          <p>Las condiciones, los plazos, los costos involucrados y los posibles riesgos se explican detalladamente en lenguaje simple antes de cualquier firma.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIOS ============ -->
+<section class="pds-section pds-dark-sec">
+  <div class="pds-wrap pds-split">
+    <div class="pds-reveal">
+      <p class="pds-eyebrow">Casos reales</p>
+      <h2>Otras familias también pensaron que ya no había salida</h2>
+      <p class="pds-lead" style="margin-bottom:26px">Llegaron con miedo, dudas y urgencia. Encontraron un equipo que escuchó la situación completa y construyó una alternativa concreta.</p>
+
+      <figure class="pds-quote">
+        <p>"El banco ya nos había notificado. Creíamos que estaba todo perdido, pero el equipo frenó el remate legalmente y estructuró un contrato claro para salvarnos."</p>
+        <figcaption>
+          <span class="pds-avatar"><svg class="pds-icon"><use href="#pds-i-user"></use></svg></span>
+          <span><b>M. T.</b><small>Santiago · Riesgo de remate</small></span>
+        </figcaption>
+      </figure>
+
+      <figure class="pds-quote">
+        <p>"Las deudas de la empresa afectaron nuestro hogar. Con su asesoría pudimos reorganizarnos, hacer un leaseback y hoy tenemos un respiro real para empezar de nuevo."</p>
+        <figcaption>
+          <span class="pds-avatar"><svg class="pds-icon"><use href="#pds-i-user"></use></svg></span>
+          <span><b>C. y M. R.</b><small>Viña del Mar · Leaseback</small></span>
+        </figcaption>
+      </figure>
+    </div>
+
+    <div class="pds-shorts pds-reveal pds-d2">
+      <div class="pds-short">
+        <button class="pds-yt" type="button" data-yt="A-H34L5pFKk" data-title="Testimonio 1" aria-label="Reproducir testimonio 1">
+          <img src="https://i.ytimg.com/vi/A-H34L5pFKk/hqdefault.jpg" alt="" loading="lazy" decoding="async" width="480" height="360">
+          <span class="pds-yt-play"><svg class="pds-icon"><use href="#pds-i-play"></use></svg></span>
+        </button>
+      </div>
+      <div class="pds-short">
+        <button class="pds-yt" type="button" data-yt="J-prDWZQQR4" data-title="Testimonio 2" aria-label="Reproducir testimonio 2">
+          <img src="https://i.ytimg.com/vi/J-prDWZQQR4/hqdefault.jpg" alt="" loading="lazy" decoding="async" width="480" height="360">
+          <span class="pds-yt-play"><svg class="pds-icon"><use href="#pds-i-play"></use></svg></span>
+        </button>
+      </div>
+      <p class="pds-shorts-note">Testimonios de clientes reales, publicados con su autorización. Identidad reservada por confidencialidad.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="pds-section" id="pds-preguntas" style="background:#fff">
+  <div class="pds-wrap">
+    <div class="pds-head-block pds-center pds-reveal">
+      <p class="pds-eyebrow pds-center">Dudas frecuentes</p>
+      <h2>Respuestas claras antes de tomar una decisión</h2>
+    </div>
+
+    <div class="pds-faq pds-reveal pds-d1">
+      <div class="pds-faq-item">
+        <button class="pds-faq-q" aria-expanded="false" aria-controls="pds-a1" id="pds-q1">
+          <span>¿Necesito tener todos los documentos antes de escribir?</span>
+          <span class="pds-faq-chev"><svg class="pds-icon"><use href="#pds-i-chevron"></use></svg></span>
+        </button>
+        <div class="pds-faq-a" id="pds-a1" role="region" aria-labelledby="pds-q1"><div>
+          <p>No. El primer contacto debe ser simple. Si falta información clave para evaluar tu caso, el equipo te guía y te explica cómo conseguirla paso a paso. Lo habitual es partir con la escritura de la propiedad, el certificado de hipotecas y gravámenes, y cualquier notificación judicial que hayas recibido.</p>
+        </div></div>
+      </div>
+
+      <div class="pds-faq-item">
+        <button class="pds-faq-q" aria-expanded="false" aria-controls="pds-a2" id="pds-q2">
+          <span>¿Pueden detener un remate?</span>
+          <span class="pds-faq-chev"><svg class="pds-icon"><use href="#pds-i-chevron"></use></svg></span>
+        </button>
+        <div class="pds-faq-a" id="pds-a2" role="region" aria-labelledby="pds-q2"><div>
+          <p>Depende del estado judicial de la causa, de la fecha fijada y de los antecedentes del proceso. No prometemos resultados sin revisar el expediente. Lo responsable es analizarlo con rapidez para determinar si todavía existen acciones viables para suspender o postergar el remate. Mientras antes se revise, más alternativas suelen quedar disponibles.</p>
+        </div></div>
+      </div>
+
+      <div class="pds-faq-item">
+        <button class="pds-faq-q" aria-expanded="false" aria-controls="pds-a3" id="pds-q3">
+          <span>¿Plan de Salida compra mi propiedad para quedarse con ella?</span>
+          <span class="pds-faq-chev"><svg class="pds-icon"><use href="#pds-i-chevron"></use></svg></span>
+        </button>
+        <div class="pds-faq-a" id="pds-a3" role="region" aria-labelledby="pds-q3"><div>
+          <p>El objetivo no es quedarse con propiedades. Cuando una estructura de leaseback es viable, se busca que la persona mantenga una opción realista de recuperar su casa bajo condiciones contractuales claras. Todas las condiciones, plazos, costos y riesgos se explican y se firman por escrito antes de cualquier decisión.</p>
+        </div></div>
+      </div>
+
+      <div class="pds-faq-item">
+        <button class="pds-faq-q" aria-expanded="false" aria-controls="pds-a4" id="pds-q4">
+          <span>¿Cuánto financiamiento puedo obtener y en qué plazo?</span>
+          <span class="pds-faq-chev"><svg class="pds-icon"><use href="#pds-i-chevron"></use></svg></span>
+        </button>
+        <div class="pds-faq-a" id="pds-a4" role="region" aria-labelledby="pds-q4"><div>
+          <p>En operaciones de leaseback el financiamiento se sitúa habitualmente entre el 51 % y el 60 % del valor comercial de la propiedad, con plazos de recompra que suelen ir de 12 a 18 meses. El proceso, desde la solicitud hasta el desembolso, toma en general entre 7 y 15 días. Son rangos referenciales: el monto y las condiciones finales dependen de la tasación, los gravámenes vigentes y la evaluación de cada caso.</p>
+        </div></div>
+      </div>
+
+      <div class="pds-faq-item">
+        <button class="pds-faq-q" aria-expanded="false" aria-controls="pds-a5" id="pds-q5">
+          <span>¿La primera evaluación tiene costo?</span>
+          <span class="pds-faq-chev"><svg class="pds-icon"><use href="#pds-i-chevron"></use></svg></span>
+        </button>
+        <div class="pds-faq-a" id="pds-a5" role="region" aria-labelledby="pds-q5"><div>
+          <p>No. La primera conversación y la revisión inicial son gratuitas y sin compromiso. Sirven para entender la urgencia, perfilar el problema y determinar si existe una alternativa viable. Si el caso avanza, cualquier honorario se informa antes por escrito.</p>
+        </div></div>
+      </div>
+
+      <div class="pds-faq-item">
+        <button class="pds-faq-q" aria-expanded="false" aria-controls="pds-a6" id="pds-q6">
+          <span>¿Atienden en todo Chile?</span>
+          <span class="pds-faq-chev"><svg class="pds-icon"><use href="#pds-i-chevron"></use></svg></span>
+        </button>
+        <div class="pds-faq-a" id="pds-a6" role="region" aria-labelledby="pds-q6"><div>
+          <p>La oficina está en Las Condes, Santiago, y trabajamos casos de distintas regiones del país de forma remota, con reuniones telefónicas o por videollamada. Si el caso lo requiere, coordinamos una reunión presencial.</p>
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ============ CTA FINAL ============ -->
+<section class="pds-cta">
+  <div class="pds-wrap pds-cta-grid pds-reveal">
+    <div>
+      <p class="pds-eyebrow">El tiempo importa</p>
+      <h2>Si tu propiedad está en riesgo, no esperes a tener todo perfecto</h2>
+      <p>El primer paso es conversar con alguien que entienda el escenario y pueda ayudarte a ordenar la urgencia hoy mismo.</p>
+    </div>
+    <div class="pds-cta-actions">
+      <a class="pds-btn pds-btn-wa pds-js-wa" href="#" data-track="click_whatsapp" data-loc="cta_final">
+        <svg class="pds-icon"><use href="#pds-i-wa"></use></svg> Hablar por WhatsApp
+      </a>
+      <a class="pds-btn pds-btn-outline pds-js-scroll-form" href="#pds-form-lead" data-track="click_cta" data-loc="cta_final">
+        Dejar mis datos
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="pds-site-footer">
+  <div class="pds-wrap">
+    <div class="pds-footer-grid">
+      <div>
+        <img class="pds-footer-logo" src="https://img.mailinblue.com/8928778/images/content_library/original/6a9701c1d45b094c7c0e34e0.png" alt="Plan de Salida" loading="lazy" decoding="async">
+        <p>Expertos en reestructuración financiera y defensa legal de propiedades. Diseñamos la estrategia correcta para que recuperes tu tranquilidad y tu patrimonio.</p>
+        <div class="pds-social">
+          <a href="https://www.instagram.com/plandesalida.cl" target="_blank" rel="noopener" aria-label="Instagram"><svg class="pds-icon" style="width:16px;height:16px"><use href="#pds-i-ig"></use></svg></a>
+          <a href="https://www.facebook.com/plandesalida.cl/" target="_blank" rel="noopener" aria-label="Facebook"><svg class="pds-icon" style="width:16px;height:16px"><use href="#pds-i-fb"></use></svg></a>
+        </div>
+      </div>
+
+      <div>
+        <h4>Comunícate con nosotros</h4>
+        <ul class="pds-f-list">
+          <li><a href="tel:+56233571087" data-track="click_telefono" data-loc="footer"><span class="pds-f-ico"><svg class="pds-icon"><use href="#pds-i-phone"></use></svg></span> +56 2 3357 1087</a></li>
+          <li><a href="mailto:contacto@plandesalida.cl" data-track="click_email" data-loc="footer"><span class="pds-f-ico"><svg class="pds-icon"><use href="#pds-i-mail"></use></svg></span> contacto@plandesalida.cl</a></li>
+          <li><a href="#" class="pds-js-wa" data-track="click_whatsapp" data-loc="footer"><span class="pds-f-ico"><svg class="pds-icon"><use href="#pds-i-wa"></use></svg></span> Chat por WhatsApp</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Nuestra oficina</h4>
+        <address class="pds-f-addr" style="font-style:normal">
+          <span class="pds-f-ico"><svg class="pds-icon"><use href="#pds-i-pin"></use></svg></span>
+          <span>Cerro El Plomo 5890<br>Las Condes<br>Región Metropolitana, Chile</span>
+        </address>
+        <a class="pds-maps" href="https://maps.google.com/?q=Cerro+El+Plomo+5890+Las+Condes" target="_blank" rel="noopener">
+          Abrir en Google Maps <svg class="pds-icon" style="width:10px;height:10px"><use href="#pds-i-external"></use></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="pds-footer-bottom">
+      <p style="margin:0">© <span id="pds-year">2026</span> Plan de Salida. Todos los derechos reservados.</p>
+      <p style="margin:0"><a href="https://plandesalida.cl/politica-privacidad/" target="_blank" rel="noopener">Política de privacidad</a></p>
+    </div>
+
+    <p class="pds-legal-note">La información de este sitio tiene carácter general e informativo y no constituye asesoría legal ni financiera para un caso particular, ni una oferta de crédito. Los resultados dependen del estado judicial de cada causa, de los plazos aplicables y de la evaluación de los antecedentes. Toda condición se formaliza por escrito antes de su firma.</p>
+  </div>
+</footer>
+
+<!-- ============ FLOTANTES ============ -->
+<a class="pds-wa-float pds-js-wa" href="#" aria-label="Contactar por WhatsApp" data-track="click_whatsapp" data-loc="float">
+  <svg class="pds-icon"><use href="#pds-i-wa"></use></svg>
+</a>
+
+<div class="pds-mobile-bar">
+  <a class="pds-btn pds-btn-ghost" href="tel:+56233571087" data-track="click_telefono" data-loc="mobile_bar">
+    <svg class="pds-icon"><use href="#pds-i-phone"></use></svg> Llamar
+  </a>
+  <a class="pds-btn pds-btn-primary pds-js-wa" href="#" data-track="click_whatsapp" data-loc="mobile_bar">
+    <svg class="pds-icon"><use href="#pds-i-wa"></use></svg> WhatsApp
+  </a>
+</div>
+<script>window.PDS_CFG={whatsapp:"56995962486",waText:"Hola, quiero que revisen mi caso hoy.",leadUrl:"",nonce:"",thankYouUrl:"",adsConversion:""};</script>
+<script>
+(function(){
+  var CFG = window.PDS_CFG || {};
+  var D = document;
+  function qsa(s,c){ return Array.prototype.slice.call((c||D).querySelectorAll(s)); }
+  var LOADED = Date.now();
+
+  /* ---------- Medicion: GA4 + Meta Pixel + dataLayer ---------- */
+  window.dataLayer = window.dataLayer || [];
+  function track(name, params){
+    params = params || {};
+    try{ window.dataLayer.push(Object.assign({event:name}, params)); }catch(e){}
+    try{ if(typeof gtag === 'function') gtag('event', name, params); }catch(e){}
+    try{
+      if(typeof fbq === 'function'){
+        if(name === 'generate_lead') fbq('track','Lead',params);
+        else if(name === 'click_whatsapp') fbq('trackCustom','ClickWhatsApp',params);
+        else fbq('trackCustom', name, params);
+      }
+    }catch(e){}
+  }
+  function adsConversion(){
+    if(!CFG.adsConversion) return;
+    try{ if(typeof gtag === 'function') gtag('event','conversion',{send_to: CFG.adsConversion}); }catch(e){}
+  }
+
+  /* ---------- Atribucion de campana (first touch) ---------- */
+  var ATTR_KEY = 'pds_attr';
+  function loadAttr(){
+    var stored = null;
+    try{ stored = JSON.parse(localStorage.getItem(ATTR_KEY) || 'null'); }catch(e){}
+    var p = null, fresh = {}, has = false;
+    try{ p = new URLSearchParams(location.search); }catch(e){}
+    if(p){
+      ['utm_source','utm_medium','utm_campaign','utm_term','utm_content','gclid','gbraid','wbraid','fbclid'].forEach(function(k){
+        var v = p.get(k); if(v){ fresh[k] = v; has = true; }
+      });
+    }
+    if(has){
+      fresh.landing = location.pathname;
+      fresh.referrer = D.referrer;
+      fresh.primer_contacto = new Date().toISOString();
+      try{ localStorage.setItem(ATTR_KEY, JSON.stringify(fresh)); }catch(e){}
+      return fresh;
+    }
+    return stored || { landing: location.pathname, referrer: D.referrer };
+  }
+  var ATTR = loadAttr();
+  var fAttr = D.getElementById('pds-f-atribucion');
+  if(fAttr) fAttr.value = JSON.stringify(ATTR);
+
+  /* ---------- WhatsApp ---------- */
+  function waUrl(text){
+    return 'https://wa.me/' + (CFG.whatsapp || '') + '?text=' + encodeURIComponent(text || CFG.waText || 'Hola');
+  }
+  qsa('.pds-js-wa').forEach(function(el){
+    el.setAttribute('href', waUrl());
+    el.setAttribute('target','_blank');
+    el.setAttribute('rel','noopener');
+  });
+
+  /* ---------- Clicks medidos ---------- */
+  D.addEventListener('click', function(e){
+    var el = e.target && e.target.closest ? e.target.closest('[data-track]') : null;
+    if(!el) return;
+    track(el.getAttribute('data-track'), {ubicacion: el.getAttribute('data-loc') || 'na'});
+  });
+
+  /* ---------- Scroll al formulario ---------- */
+  function scrollToForm(focus){
+    var card = D.getElementById('pds-form-lead');
+    if(!card) return;
+    var top = card.getBoundingClientRect().top + window.pageYOffset - 96;
+    window.scrollTo({ top: top < 0 ? 0 : top, behavior:'smooth' });
+    if(focus){
+      setTimeout(function(){
+        var f = D.getElementById('pds-f-nombre');
+        if(f) f.focus({preventScroll:true});
+      }, 550);
+    }
+  }
+  qsa('.pds-js-scroll-form').forEach(function(a){
+    a.addEventListener('click', function(e){ e.preventDefault(); scrollToForm(true); });
+  });
+
+  /* ---------- Formulario ---------- */
+  (function(){
+    var form = D.getElementById('pds-lead-form');
+    var card = D.getElementById('pds-form-lead');
+    var btn  = D.getElementById('pds-lead-submit');
+    if(!form) return;
+
+    function setErr(id, show){
+      var input = D.getElementById('pds-f-' + id);
+      var err = D.getElementById('pds-e-' + id);
+      if(err) err.classList.toggle('pds-show', show);
+      if(input) input.setAttribute('aria-invalid', show ? 'true' : 'false');
+      return !show;
+    }
+    function cleanPhone(v){ return (v || '').replace(/[^\d]/g,'').replace(/^56/,''); }
+
+    var policyLink = D.querySelector('.pds-consent a');
+    if(policyLink) policyLink.addEventListener('click', function(ev){ ev.stopPropagation(); });
+
+    function validate(){
+      var ok = true;
+      ok = setErr('nombre', form.nombre.value.trim().length < 3) && ok;
+      var tel = cleanPhone(form.telefono.value);
+      ok = setErr('telefono', !(tel.length === 9 || tel.length === 8)) && ok;
+      var mail = form.email.value.trim();
+      ok = setErr('email', mail !== '' && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(mail)) && ok;
+      ok = setErr('situacion', form.situacion.value === '') && ok;
+      ok = setErr('consent', !D.getElementById('pds-f-consent').checked) && ok;
+      return ok;
+    }
+
+    ['nombre','telefono','email','situacion'].forEach(function(id){
+      var el = D.getElementById('pds-f-' + id);
+      if(el) el.addEventListener('blur', function(){ if(el.value) validate(); });
+    });
+
+    var started = false;
+    form.addEventListener('input', function(){
+      if(started) return;
+      started = true;
+      track('form_start', {formulario:'lead_hero'});
+    });
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      if(!validate()){
+        track('form_error', {formulario:'lead_hero'});
+        var bad = form.querySelector('[aria-invalid="true"]');
+        if(bad) bad.focus();
+        return;
+      }
+
+      var tiempo = Date.now() - LOADED;
+      var tiempoField = D.getElementById('pds-f-tiempo');
+      if(tiempoField) tiempoField.value = tiempo;
+
+      var data = {
+        nombre: form.nombre.value.trim(),
+        telefono: '+56' + cleanPhone(form.telefono.value),
+        email: form.email.value.trim(),
+        situacion: form.situacion.value,
+        urgencia: form.urgencia ? form.urgencia.value : '',
+        acepta_publicidad: D.getElementById('pds-f-publicidad').checked ? 'Sí' : 'No',
+        website: form.website ? form.website.value : '',
+        tiempo: tiempo,
+        atribucion: ATTR,
+        origen: 'landing_plan_de_salida',
+        pagina: location.href,
+        referrer: D.referrer,
+        fecha: new Date().toISOString()
+      };
+
+      var lbl = btn.querySelector('.pds-lbl');
+      var original = lbl.textContent;
+      lbl.textContent = 'Enviando...';
+      btn.disabled = true;
+
+      function restore(){ lbl.textContent = original; btn.disabled = false; }
+
+      function done(){
+        track('generate_lead', {formulario:'lead_hero', situacion:data.situacion, urgencia:data.urgencia || 'no_indicada'});
+        adsConversion();
+        if(CFG.thankYouUrl){ window.location.href = CFG.thankYouUrl; return; }
+        card.classList.add('pds-is-sent');
+        var top = card.getBoundingClientRect().top + window.pageYOffset - 96;
+        window.scrollTo({ top: top < 0 ? 0 : top, behavior:'smooth' });
+      }
+
+      function fallbackWhatsApp(){
+        var msg = 'Hola, soy ' + data.nombre + '. Mi telefono es ' + data.telefono +
+                  '. Mi situacion es: ' + data.situacion +
+                  (data.urgencia ? ' (' + data.urgencia + ')' : '') +
+                  '. Quiero que revisen mi caso.';
+        window.open(waUrl(msg), '_blank', 'noopener');
+        restore();
+        done();
+      }
+
+      if(!CFG.leadUrl){
+        setTimeout(fallbackWhatsApp, 350);
+        return;
+      }
+
+      var headers = {'Content-Type':'application/json'};
+      if(CFG.nonce) headers['X-WP-Nonce'] = CFG.nonce;
+
+      fetch(CFG.leadUrl, {method:'POST', headers:headers, body: JSON.stringify(data)})
+        .then(function(r){
+          if(!r.ok) throw new Error('http_' + r.status);
+          restore();
+          done();
+        })
+        .catch(function(){
+          track('form_fallback', {formulario:'lead_hero'});
+          fallbackWhatsApp();
+        });
+    });
+  })();
+
+  /* ---------- FAQ accesible ---------- */
+  qsa('.pds-faq-q').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var open = btn.getAttribute('aria-expanded') === 'true';
+      qsa('.pds-faq-q').forEach(function(b){
+        b.setAttribute('aria-expanded','false');
+        var p = D.getElementById(b.getAttribute('aria-controls'));
+        if(p){ p.style.maxHeight = null; p.classList.remove('pds-open'); }
+      });
+      if(!open){
+        btn.setAttribute('aria-expanded','true');
+        var panel = D.getElementById(btn.getAttribute('aria-controls'));
+        panel.classList.add('pds-open');
+        panel.style.maxHeight = panel.scrollHeight + 'px';
+        track('faq_open', {pregunta: btn.textContent.trim().slice(0,60)});
+      }
+    });
+  });
+
+  /* ---------- Video: fachada, YouTube solo al hacer click ---------- */
+  qsa('.pds-yt').forEach(function(box){
+    box.addEventListener('click', function(){
+      var id = box.getAttribute('data-yt');
+      var f = D.createElement('iframe');
+      f.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0&modestbranding=1';
+      f.title = box.getAttribute('data-title') || 'Video Plan de Salida';
+      f.loading = 'lazy';
+      f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      f.allowFullscreen = true;
+      box.innerHTML = '';
+      box.appendChild(f);
+      track('video_play', {video: box.getAttribute('data-title') || id});
+    });
+  });
+
+  /* ---------- Tarjetas giratorias (tactil y teclado) ---------- */
+  qsa('.pds-flip').forEach(function(card){
+    function toggle(){
+      var on = card.classList.toggle('pds-flipped');
+      card.setAttribute('aria-expanded', on ? 'true' : 'false');
+    }
+    card.addEventListener('click', toggle);
+    card.addEventListener('keydown', function(ev){
+      if(ev.key === 'Enter' || ev.key === ' '){ ev.preventDefault(); toggle(); }
+    });
+  });
+
+  /* ---------- Por que Plan de Salida: indice + panel ---------- */
+  (function(){
+    var tabs = qsa('.pds-why-tab');
+    if(!tabs.length) return;
+    tabs.forEach(function(tab){
+      tab.addEventListener('click', function(){
+        tabs.forEach(function(t){
+          t.setAttribute('aria-selected','false');
+          var p = D.getElementById(t.getAttribute('aria-controls'));
+          if(p) p.classList.remove('pds-active');
+        });
+        tab.setAttribute('aria-selected','true');
+        var panel = D.getElementById(tab.getAttribute('aria-controls'));
+        if(panel) panel.classList.add('pds-active');
+        track('why_open', {razon: tab.textContent.trim().slice(0,50)});
+      });
+      tab.addEventListener('keydown', function(ev){
+        var i = tabs.indexOf(tab), next = null;
+        if(ev.key === 'ArrowDown' || ev.key === 'ArrowRight') next = tabs[(i + 1) % tabs.length];
+        if(ev.key === 'ArrowUp' || ev.key === 'ArrowLeft') next = tabs[(i - 1 + tabs.length) % tabs.length];
+        if(next){ ev.preventDefault(); next.focus(); next.click(); }
+      });
+    });
+  })();
+
+  /* ---------- Header pegajoso, reveal y profundidad de scroll ---------- */
+  (function(){
+    var header = D.getElementById('pds-site-header');
+    var marks = {25:false,50:false,75:false,100:false};
+    var ticking = false;
+
+    function onScroll(){
+      if(header) header.classList.toggle('pds-is-stuck', window.scrollY > 8);
+      var h = D.documentElement;
+      var pct = (h.scrollTop + window.innerHeight) / h.scrollHeight * 100;
+      [25,50,75,100].forEach(function(m){
+        if(!marks[m] && pct >= m){ marks[m] = true; track('scroll_depth', {porcentaje:m}); }
+      });
+      ticking = false;
+    }
+    window.addEventListener('scroll', function(){
+      if(!ticking){ ticking = true; window.requestAnimationFrame(onScroll); }
+    }, {passive:true});
+
+    var reveals = qsa('.pds-reveal');
+    function revealAll(){ reveals.forEach(function(el){ el.classList.add('pds-in'); }); }
+    /* Lo que ya esta en pantalla se muestra de inmediato, sin esperar al observador. */
+    reveals.forEach(function(el){
+      if(el.getBoundingClientRect().top < window.innerHeight) el.classList.add('pds-in');
+    });
+    if('IntersectionObserver' in window && D.visibilityState === 'visible'){
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(en){
+          if(en.isIntersecting){ en.target.classList.add('pds-in'); io.unobserve(en.target); }
+        });
+      }, {threshold:.12, rootMargin:'0px 0px -40px 0px'});
+      reveals.forEach(function(el){ if(!el.classList.contains('pds-in')) io.observe(el); });
+      /* Red de seguridad: el contenido nunca queda oculto si el observador no reporta. */
+      setTimeout(revealAll, 1500);
+    } else {
+      revealAll();
+    }
+
+    var y = D.getElementById('pds-year');
+    if(y) y.textContent = new Date().getFullYear();
+  })();
+})();
+</script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"LegalService",
+  "name":"Plan de Salida",
+  "description":"Especialistas en defensa hipotecaria y patrimonial: remates, embargos, financiamiento y leaseback con opción de recompra.",
+  "url":"https://plandesalida.cl/",
+  "logo":"https://img.mailinblue.com/8928778/images/content_library/original/6a96ff7b750d5f9277e3f7f7.png",
+  "telephone":"+56233571087",
+  "email":"contacto@plandesalida.cl",
+  "priceRange":"$$",
+  "image":"https://img.mailinblue.com/8928778/images/content_library/original/6a96ff7b750d5f9277e3f7f7.png",
+  "areaServed":{"@type":"Country","name":"Chile"},
+  "knowsLanguage":"es-CL",
+  "hasOfferCatalog":{
+    "@type":"OfferCatalog",
+    "name":"Servicios de defensa patrimonial y financiamiento",
+    "itemListElement":[
+      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Detener o postergar un remate hipotecario"}},
+      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Defensa ante embargos"}},
+      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Financiamiento con garantía inmobiliaria"}},
+      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Leaseback con opción de recompra"}},
+      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Ley de insolvencia y reemprendimiento"}},
+      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Asesoría legal inmobiliaria"}}
+    ]
+  },
+  "address":{
+    "@type":"PostalAddress",
+    "streetAddress":"Cerro El Plomo 5890",
+    "addressLocality":"Las Condes",
+    "addressRegion":"Región Metropolitana",
+    "addressCountry":"CL"
+  },
+  "sameAs":[
+    "https://www.instagram.com/plandesalida.cl",
+    "https://www.facebook.com/plandesalida.cl/"
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {"@type":"Question","name":"¿Necesito tener todos los documentos antes de escribir?","acceptedAnswer":{"@type":"Answer","text":"No. El primer contacto debe ser simple. Si falta información clave para evaluar tu caso, el equipo te guía y te explica cómo conseguirla paso a paso."}},
+    {"@type":"Question","name":"¿Pueden detener un remate?","acceptedAnswer":{"@type":"Answer","text":"Depende del estado judicial de la causa, de la fecha fijada y de los antecedentes del proceso. Se revisa el expediente con rapidez para determinar si existen acciones viables para suspender o postergar el remate."}},
+    {"@type":"Question","name":"¿Plan de Salida compra mi propiedad para quedarse con ella?","acceptedAnswer":{"@type":"Answer","text":"El objetivo no es quedarse con propiedades. Cuando una estructura de leaseback es viable, se busca que la persona mantenga una opción realista de recuperar su casa bajo condiciones contractuales claras."}},
+    {"@type":"Question","name":"¿Cuánto financiamiento puedo obtener y en qué plazo?","acceptedAnswer":{"@type":"Answer","text":"En operaciones de leaseback el financiamiento se sitúa habitualmente entre el 51 % y el 60 % del valor comercial, con plazos de recompra de 12 a 18 meses. El proceso toma en general entre 7 y 15 días. Son rangos referenciales sujetos a evaluación."}},
+    {"@type":"Question","name":"¿La primera evaluación tiene costo?","acceptedAnswer":{"@type":"Answer","text":"No. La primera conversación y la revisión inicial son gratuitas y sin compromiso."}},
+    {"@type":"Question","name":"¿Atienden en todo Chile?","acceptedAnswer":{"@type":"Answer","text":"La oficina está en Las Condes, Santiago, y se atienden casos de distintas regiones de forma remota, con reuniones telefónicas o por videollamada."}}
+  ]
+}
+</script>
+</body>
+</html>
